@@ -6,7 +6,7 @@
 # - wants to use /var/log/xdefactor-ng.log - teach him not to
 #
 %define		_snap	27022004
-%define		_dbsnap	20030212
+%define		_dbsnap	2004_04_08
 %define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
 Summary:	XdeFactor - New Generation of program to make invoices
 Summary(pl):	XdeFactor - Nowa Generacja programu do fakturowania
@@ -22,8 +22,9 @@ Source0:	http://www.xdefactor.netsync.pl/snapshots/%{name}-%{version}.tar.gz
 # Source0-md5:	3f2d7b129b19cbeb79d5fa197b175f4b
 Source1:	%{name}.conf
 Source2:	%{name}-modules.conf
-Source10:	http://defactor-ng.gnu.pl/deFactor-ng_sql_snapshots/deFactor-ng_sql_%{_dbsnap}.tar.gz
-# Source10-md5:	2f442cd5c2d2df8215cbc8965be7740c
+Source10:	http://duch.mimuw.edu.pl/~hunter/deFactor-ng_sql_%{_dbsnap}.tar.gz
+# Source10-md5:	da1bc049b3bbb33d06c364f3b6fefb11
+#http://defactor-ng.gnu.pl/deFactor-ng_sql_snapshots/deFactor-ng_sql_%{_dbsnap}.tar.gz
 Patch0:		%{name}-includes.patch
 Patch1:		%{name}-modules-includes.patch
 Patch2:		%{name}-sharedir.patch
