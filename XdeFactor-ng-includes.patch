@@ -1,0 +1,14 @@
+--- xdefactor-ng/src/callbacks.h.orig	Sun Feb 16 14:24:27 2003
++++ xdefactor-ng/src/callbacks.h	Sun Feb 16 14:24:43 2003
+@@ -8,9 +8,9 @@
+ #include <gtk/gtk.h>
+ #include <pango/pango.h>
+ #include <fcntl.h>
+-#include <glib/glib.h>
++#include <glib.h>
+ #include <dlfcn.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <pwd.h>
+ #include <unistd.h>
+ #include <errno.h>

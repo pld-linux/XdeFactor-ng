@@ -1,0 +1,142 @@
+diff -ruN xdefactor-ng/src/modules.orig/archive_invoices/moduleArchiveInvoices.h xdefactor-ng/src/modules/archive_invoices/moduleArchiveInvoices.h
+--- xdefactor-ng/src/modules.orig/archive_invoices/moduleArchiveInvoices.h	Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/archive_invoices/moduleArchiveInvoices.h	Sun Feb 16 14:48:04 2003
+@@ -6,7 +6,7 @@
+ #include <stdio.h>
+ #include <gdk/gdkkeysyms.h>
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include "xdef.h"
+ #include "xdfDialogMsg.h"
+ #include "invoiceTax.h"
+diff -ruN xdefactor-ng/src/modules.orig/archive_invoices/xdef.h xdefactor-ng/src/modules/archive_invoices/xdef.h
+--- xdefactor-ng/src/modules.orig/archive_invoices/xdef.h	Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/archive_invoices/xdef.h	Sun Feb 16 14:47:42 2003
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ 
+diff -ruN xdefactor-ng/src/modules.orig/clients/moduleClients.h xdefactor-ng/src/modules/clients/moduleClients.h
+--- xdefactor-ng/src/modules.orig/clients/moduleClients.h	Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/clients/moduleClients.h	Sun Feb 16 14:48:38 2003
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <string.h>
+ #include <errno.h>
+ #include <fcntl.h>
+diff -ruN xdefactor-ng/src/modules.orig/goods/moduleGoods.h xdefactor-ng/src/modules/goods/moduleGoods.h
+--- xdefactor-ng/src/modules.orig/goods/moduleGoods.h	Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/goods/moduleGoods.h	Sun Feb 16 14:49:27 2003
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+diff -ruN xdefactor-ng/src/modules.orig/goods/xdef.h xdefactor-ng/src/modules/goods/xdef.h
+--- xdefactor-ng/src/modules.orig/goods/xdef.h	Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/goods/xdef.h	Sun Feb 16 14:49:41 2003
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ 
+diff -ruN xdefactor-ng/src/modules.orig/invoices/moduleInvoices.h xdefactor-ng/src/modules/invoices/moduleInvoices.h
+--- xdefactor-ng/src/modules.orig/invoices/moduleInvoices.h	Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/invoices/moduleInvoices.h	Sun Feb 16 14:51:11 2003
+@@ -1,7 +1,7 @@
+ #ifndef __MODULE_INVOICES_H__
+ #define __MODULE_INVOICES_H__
+ 
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <gtk/gtk.h>
+ #include <unistd.h>
+ #include <stdio.h>
+diff -ruN xdefactor-ng/src/modules.orig/invoices/xdef.h xdefactor-ng/src/modules/invoices/xdef.h
+--- xdefactor-ng/src/modules.orig/invoices/xdef.h	Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/invoices/xdef.h	Sun Feb 16 14:51:28 2003
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ 
+diff -ruN xdefactor-ng/src/modules.orig/login/moduleLogin.h xdefactor-ng/src/modules/login/moduleLogin.h
+--- xdefactor-ng/src/modules.orig/login/moduleLogin.h	Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/login/moduleLogin.h	Sun Feb 16 14:51:50 2003
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <string.h>
+ #include <errno.h>
+ #include <fcntl.h>
+diff -ruN xdefactor-ng/src/modules.orig/means_of_transport/moduleMeansOfTransport.h xdefactor-ng/src/modules/means_of_transport/moduleMeansOfTransport.h
+--- xdefactor-ng/src/modules.orig/means_of_transport/moduleMeansOfTransport.h	Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/means_of_transport/moduleMeansOfTransport.h	Sun Feb 16 14:52:21 2003
+@@ -1,8 +1,8 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <gtk/gtk.h>
+-#include <glib/glib.h>
+-#include <postgresql/libpq-fe.h>
++#include <glib.h>
++#include <libpq-fe.h>
+ #include <string.h>
+ #include "xdef.h"
+ #include "xdfDialogMsg.h"
+diff -ruN xdefactor-ng/src/modules.orig/means_of_transport/xdef.h xdefactor-ng/src/modules/means_of_transport/xdef.h
+--- xdefactor-ng/src/modules.orig/means_of_transport/xdef.h	Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/means_of_transport/xdef.h	Sun Feb 16 14:52:07 2003
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ 
+diff -ruN xdefactor-ng/src/modules.orig/stores/moduleStores.h xdefactor-ng/src/modules/stores/moduleStores.h
+--- xdefactor-ng/src/modules.orig/stores/moduleStores.h	Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/stores/moduleStores.h	Sun Feb 16 14:52:50 2003
+@@ -2,8 +2,8 @@
+ #include <stdlib.h>
+ #include <gtk/gtk.h>
+ #include <unistd.h>
+-#include <glib/glib.h>
+-#include <postgresql/libpq-fe.h>
++#include <glib.h>
++#include <libpq-fe.h>
+ #include <string.h>
+ #include "xdef.h"
+ #include "xdfDialogMsg.h"
+diff -ruN xdefactor-ng/src/modules.orig/stores/xdef.h xdefactor-ng/src/modules/stores/xdef.h
+--- xdefactor-ng/src/modules.orig/stores/xdef.h	Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/stores/xdef.h	Sun Feb 16 14:52:40 2003
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+
+diff -ruN xdefactor-ng/src/modules.orig/logout/moduleLogout.h xdefactor-ng/src/modules/logout/moduleLogout.h
+--- xdefactor-ng/src/modules.orig/logout/moduleLogout.h Sun Feb 16 14:46:56 2003
++++ xdefactor-ng/src/modules/logout/moduleLogout.h	Sun Feb 16 14:51:50 2003
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <string.h>
+ #include <errno.h>
+ #include <fcntl.h>
