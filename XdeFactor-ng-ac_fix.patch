@@ -1,1 +1,14 @@
-SEE DEVEL BRANCH
+diff -Nura XdeFactor-ng.bef/configure.in XdeFactor-ng.aft/configure.in
+--- XdeFactor-ng.bef/configure.in	2004-04-13 12:55:47.000000000 +0200
++++ XdeFactor-ng.aft/configure.in	2004-04-13 12:57:06.000000000 +0200
+@@ -126,9 +126,7 @@
+   [  --enable-debug         Kompilacja z opcja -ggdb])
+ 
+ if test "x$enable_debug" = "xyes"; then
+-	CFLAGS="-ggdb -O2 -Wall"
+-else
+-	CFLAGS="-O2 -Wall"
++	CFLAGS="$CFLAGS -ggdb -O2 -Wall"
+ fi
+ 
+ #dnl xdefactor user
