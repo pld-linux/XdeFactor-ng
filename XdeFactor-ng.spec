@@ -19,7 +19,7 @@ BuildRequires:	gtk+2-devel
 BuildRequires:	pango-devel
 BuildRequires:	pkgconfig
 BuildRequires:	freetype-devel
-Prereq: 	/sbin/ldconfig
+Prereq:		/sbin/ldconfig
 Source0:	http://defactor-ng.gnu.pl/XdeFactor-ng_snapshots/%{name}_%{version}.tar.gz
 Source1:	%{name}.conf
 Source2:	%{name}-modules.conf
@@ -36,8 +36,9 @@ invoices. It's based on GTK+2 library.
 
 %description -l pl
 Ca³kiem przyjemny program do fakturowania, obs³ugi klientów, obs³ugi
-magazynów, zarz±dzania us³ugami/towarami, zarz±dzania ¶rodkami transportu,
-zarz±dzania fakturami archiwalnymi. Jest on oparty o bibliotekê GTK+2.
+magazynów, zarz±dzania us³ugami/towarami, zarz±dzania ¶rodkami
+transportu, zarz±dzania fakturami archiwalnymi. Jest on oparty o
+bibliotekê GTK+2.
 
 %prep
 %setup -q -n xdefactor-ng
@@ -71,7 +72,7 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules.conf
 
 
 cd src/modules
-	 
+
 for i in %{_modules}; do
  cd $i
 for j in *.so; do
