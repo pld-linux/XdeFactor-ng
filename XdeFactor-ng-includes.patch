@@ -1,5 +1,6 @@
---- /home/users/hunter/.vim/backup/callbacks.h~	2004-04-08 18:41:13.000000000 +0200
-+++ src/callbacks.h	2004-04-08 18:41:13.000000000 +0200
+diff -Nura XdeFactor-ng.orig/src/callbacks.h XdeFactor-ng/src/callbacks.h
+--- XdeFactor-ng.orig/src/callbacks.h	2004-03-08 02:29:34.000000000 +0100
++++ XdeFactor-ng/src/callbacks.h	2004-03-08 02:48:04.000000000 +0100
 @@ -9,7 +9,7 @@
  #include <fcntl.h>
  #include <glib.h>
@@ -9,8 +10,9 @@
  #include <pwd.h>
  #include <unistd.h>
  #include <errno.h>
---- /home/users/hunter/.vim/backup/moduleArchiveInvoices.h~	2004-04-08 18:44:47.000000000 +0200
-+++ src/modules/archive_invoices/moduleArchiveInvoices.h	2004-04-08 18:44:47.000000000 +0200
+diff -Nura XdeFactor-ng.orig/src/modules/archive_invoices/moduleArchiveInvoices.h XdeFactor-ng/src/modules/archive_invoices/moduleArchiveInvoices.h
+--- XdeFactor-ng.orig/src/modules/archive_invoices/moduleArchiveInvoices.h	2004-03-08 02:29:34.000000000 +0100
++++ XdeFactor-ng/src/modules/archive_invoices/moduleArchiveInvoices.h	2004-03-08 02:48:04.000000000 +0100
 @@ -6,7 +6,7 @@
  #include <stdio.h>
  #include <gdk/gdkkeysyms.h>
@@ -20,8 +22,9 @@
  #include "../common/defs.h"
  
  void findInvoices (GtkWidget *widget, xdfInvConnModule *conn_mod);
---- /home/users/hunter/.vim/backup/moduleClients.h~	2004-04-08 18:53:27.000000000 +0200
-+++ src/modules/clients/moduleClients.h	2004-04-08 18:53:27.000000000 +0200
+diff -Nura XdeFactor-ng.orig/src/modules/clients/moduleClients.h XdeFactor-ng/src/modules/clients/moduleClients.h
+--- XdeFactor-ng.orig/src/modules/clients/moduleClients.h	2004-03-08 02:29:34.000000000 +0100
++++ XdeFactor-ng/src/modules/clients/moduleClients.h	2004-03-08 02:48:04.000000000 +0100
 @@ -1,5 +1,5 @@
  #include <gtk/gtk.h>
 -#include <postgresql/libpq-fe.h>
@@ -29,8 +32,9 @@
  #include <string.h>
  #include <errno.h>
  #include <fcntl.h>
---- /home/users/hunter/.vim/backup/moduleGoods.h~	2004-04-08 18:55:15.000000000 +0200
-+++ src/modules/goods/moduleGoods.h	2004-04-08 18:55:15.000000000 +0200
+diff -Nura XdeFactor-ng.orig/src/modules/goods/moduleGoods.h XdeFactor-ng/src/modules/goods/moduleGoods.h
+--- XdeFactor-ng.orig/src/modules/goods/moduleGoods.h	2004-03-08 02:29:34.000000000 +0100
++++ XdeFactor-ng/src/modules/goods/moduleGoods.h	2004-03-08 02:48:04.000000000 +0100
 @@ -1,5 +1,5 @@
  #include <gtk/gtk.h>
 -#include <postgresql/libpq-fe.h>
@@ -38,8 +42,9 @@
  #include <stdio.h>
  #include <stdlib.h>
  #include <string.h>
---- /home/users/hunter/.vim/backup/moduleStores.h~	2004-04-08 18:58:12.000000000 +0200
-+++ src/modules/stores/moduleStores.h	2004-04-08 18:58:12.000000000 +0200
+diff -Nura XdeFactor-ng.orig/src/modules/stores/moduleStores.h XdeFactor-ng/src/modules/stores/moduleStores.h
+--- XdeFactor-ng.orig/src/modules/stores/moduleStores.h	2004-03-08 02:29:34.000000000 +0100
++++ XdeFactor-ng/src/modules/stores/moduleStores.h	2004-03-08 02:48:04.000000000 +0100
 @@ -3,7 +3,7 @@
  #include <gtk/gtk.h>
  #include <unistd.h>
@@ -49,8 +54,19 @@
  #include <string.h>
  #include "../common/defs.h"
  
---- /home/users/hunter/.vim/backup/xdfPQexec.c~	2004-04-08 19:00:08.000000000 +0200
-+++ src/xdfPQexec.c	2004-04-08 19:00:08.000000000 +0200
+diff -Nura XdeFactor-ng.orig/src/tools/xdef.h XdeFactor-ng/src/tools/xdef.h
+--- XdeFactor-ng.orig/src/tools/xdef.h	2004-03-08 02:29:34.000000000 +0100
++++ XdeFactor-ng/src/tools/xdef.h	2004-03-08 02:48:04.000000000 +0100
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ 
+diff -Nura XdeFactor-ng.orig/src/xdfPQexec.c XdeFactor-ng/src/xdfPQexec.c
+--- XdeFactor-ng.orig/src/xdfPQexec.c	2004-03-08 02:29:34.000000000 +0100
++++ XdeFactor-ng/src/xdfPQexec.c	2004-03-08 02:48:04.000000000 +0100
 @@ -1,4 +1,4 @@
 -#include <postgresql/libpq-fe.h>
 +#include <libpq-fe.h>
