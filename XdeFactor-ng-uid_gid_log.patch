@@ -1,1 +1,120 @@
-FOR NOW IT'S ONLY FOR DEVEL BRANCH
+diff -Nura xdefactor-ng.p0/configure.in xdefactor-ng.new/configure.in
+--- xdefactor-ng.p0/configure.in	2004-03-11 08:11:35.000000000 +0100
++++ xdefactor-ng.new/configure.in	2004-03-11 08:21:22.000000000 +0100
+@@ -18,13 +18,13 @@
+ 
+ AC_DEFINE([TITLE],  ["XdeFactor-ng v1.0"], [Nazwa i wersja softu.])
+ 
+-AC_DEFINE([LOG_FILE], ["/var/log/xdefactor-ng.log"], [Plik z logami.])
++AC_DEFINE([LOG_FILE], [".xdefactor-ng.log"], [Plik z logami.])
+ 
+ AC_DEFINE([LOG_ATR], ["a"], [Attr logow.])
+ 
+-AC_DEFINE([INVOICE_NAME_TXT], [".xdefactor-ng.txt"], [Wygenerowana faktura TXT])
++AC_DEFINE([INVOICE_NAME_TXT], [".xdefactor-ng.txt"], [Wygenerowana faktura TXT])
+ 
+-AC_DEFINE([INVOICE_NAME_PS], [".xdefactor-ng.ps"], [Wygenerowana faktura PS])
++AC_DEFINE([INVOICE_NAME_PS], [".xdefactor-ng.ps"], [Wygenerowana faktura PS])
+ 
+ AC_DEFINE([INVOICE_ORIG_H], ["/usr/share/xdefactor-ng/printing/invoiceh.ps"], [Nag³ówek faktury postscriptowej])
+ 
+@@ -68,8 +68,8 @@
+ SHARE_DIR="/usr/share/xdefactor-ng"
+ AC_SUBST(SHARE_DIR)
+ 
+-AC_DEFINE([LOG_DIR], ["/var/log"], [Katalog z logami.])
+-LOG_DIR="/var/log"
++AC_DEFINE([LOG_DIR], ["~"], [Katalog z logami.])
++LOG_DIR="~"
+ AC_SUBST(LOG_DIR)
+ 
+ AC_DEFINE([XDEFACTOR_CONF], ["xdefactor-ng.conf"], [Plik z konfiguracja xdef.])
+@@ -131,37 +131,37 @@
+ 	CFLAGS="-O2 -Wall"
+ fi
+ 
+-dnl xdefactor user
+-AC_ARG_WITH(user,
+-[  --with-user=uid        name of the xdefactor-ng user (default=xdefactor).],
+-xdefactor_user="$withval", xdefactor_user="xdefactor")
+-
+-dnl clamav group
+-AC_ARG_WITH(group,
+-[  --with-group=gid       name of the xdefactor-ng group (default=xdefactor).],
+-xdefactor_group="$withval", xdefactor_group="xdefactor")
+-
+-dnl AC_DEFINE_UNQUOTED(XDEFACTORUSER,"$xdefactor_user",)
+-dnl AC_DEFINE_UNQUOTED(XDEFACTORGROUP,"$xdefactor_group",)
+-
+-
+-AC_MSG_RESULT(Checking /etc/passwd...)
+-if test -r /etc/passwd; then
+-	xdefactoruser=`cat /etc/passwd|grep ${xdefactor_user}`
+-	xdefactorgroup=`cat /etc/group|grep ${xdefactor_group}`
+-fi
+-
+-if test -z "$xdefactoruser" || test -z "$xdefactorgroup"
+-then
+-	echo
+-	echo "ERROR: User \"$xdefactor_user\" and/or group \"$xdefactor_group\" doesn't exist. Please create it. "
+-	exit 1
+-else
+-	XDEFACTORUSER="${xdefactor_user}"
+-	XDEFACTORGROUP="${xdefactor_group}"
+-	AC_SUBST(XDEFACTORUSER)
+-	AC_SUBST(XDEFACTORGROUP)
+-fi
++#dnl xdefactor user
++#AC_ARG_WITH(user,
++#[  --with-user=uid        name of the xdefactor-ng user (default=xdefactor).],
++#xdefactor_user="$withval", xdefactor_user="xdefactor")
++#
++#dnl clamav group - hehehe 
++#AC_ARG_WITH(group,
++#[  --with-group=gid       name of the xdefactor-ng group (default=xdefactor).],
++#xdefactor_group="$withval", xdefactor_group="xdefactor")
++
++#dnl AC_DEFINE_UNQUOTED(XDEFACTORUSER,"$xdefactor_user",)
++#dnl AC_DEFINE_UNQUOTED(XDEFACTORGROUP,"$xdefactor_group",)
++
++
++#AC_MSG_RESULT(Checking /etc/passwd...)
++#if test -r /etc/passwd; then
++#	xdefactoruser=`cat /etc/passwd|grep ${xdefactor_user}`
++#	xdefactorgroup=`cat /etc/group|grep ${xdefactor_group}`
++#fi
++
++#if test -z "$xdefactoruser" || test -z "$xdefactorgroup"
++#then
++#	echo
++#	echo "ERROR: User \"$xdefactor_user\" and/or group \"$xdefactor_group\" doesn't exist. Please create it. "
++#	exit 1
++#else
++#	XDEFACTORUSER="${xdefactor_user}"
++#	XDEFACTORGROUP="${xdefactor_group}"
++#	AC_SUBST(XDEFACTORUSER)
++#	AC_SUBST(XDEFACTORGROUP)
++#fi
+ 																					 
+ 
+ AC_OUTPUT(	Makefile 
+--- xdefactor-ng.p0/conf/Makefile.in	2004-03-11 08:11:35.000000000 +0100
++++ xdefactor-ng.new/conf/Makefile.in	2004-03-11 08:42:24.000000000 +0100
+@@ -16,8 +16,6 @@
+ LIB_DIR = @LIB_DIR@
+ SHARE_DIR = @SHARE_DIR@
+ LOG_DIR = @LOG_DIR@
+-XDEFACTORGROUP = @XDEFACTORGROUP@
+-XDEFACTORUSER = @XDEFACTORUSER@
+ 
+ all:
+ 
+@@ -36,7 +34,7 @@
+ 	fi
+ 	$(INSTALL_DATA) -D logo.jpg  $(DESTDIR)$(SHARE_DIR)/images/logo.jpg
+ 	$(INSTALL_DATA) -D icon32x32.xpm  $(DESTDIR)$(SHARE_DIR)/images/icon32x32.xpm
+-	$(INSTALL) -D -m 660 -g $(XDEFACTORGROUP) -o $(XDEFACTORUSER) xdefactor-ng.log $(DESTDIR)/$(LOG_DIR)/xdefactor-ng.log
++	#	
+ 
+ clean:
+ 	echo "Nothing to do..."
