@@ -4,17 +4,20 @@
 #   configure our databases to work with XdeFactor-ng or phpDeFactor-ng
 # - add user ksiegowy (accounter) to whole distribution ?
 #
-%define		_snap	20030212
+%define		_snap	27022004
 %define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
 Summary:	XdeFactor - New Generation of program to make invoices
 Summary(pl):	XdeFactor - Nowa Generacja programu do fakturowania
 Name:		XdeFactor-ng
 Version:	%{_snap}
-Release:	2
+Release:	0
+Epoch:		1
 License:	GPL
 Group:		Applications
-Source0:	http://defactor-ng.gnu.pl/XdeFactor-ng_snapshots/%{name}_%{version}.tar.gz
-# Source0-md5:	94f7f1abfafbff21183a7d3ee40f9d95
+#Source0:	http://defactor-ng.gnu.pl/XdeFactor-ng_snapshots/%{name}_%{version}.tar.gz
+# S XXXource0-md5:	94f7f1abfafbff21183a7d3ee40f9d95
+Source0:	http://www.xdefactor.netsync.pl/snapshots/%{name}-%{version}.tar.gz
+# Source0-md5:	3f2d7b129b19cbeb79d5fa197b175f4b
 Source1:	%{name}.conf
 Source2:	%{name}-modules.conf
 Patch0:		%{name}-includes.patch
@@ -41,13 +44,18 @@ transportu, zarz±dzania fakturami archiwalnymi. Jest on oparty o
 bibliotekê GTK+2.
 
 %prep
-%setup -q -n xdefactor-ng
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%setup -q -n %{name}
+%patch0 -p0
+#%patch1 -p1
+#%patch2 -p1
 
 %build
-cd src
+
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure --with-user=nobody --with-group=nogroup
 %{__make} CC="%{__cc} %{rpmcflags}"
 
 cd modules
