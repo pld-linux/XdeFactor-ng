@@ -12,7 +12,7 @@ Summary:	XdeFactor - New Generation of program to make invoices
 Summary(pl):	XdeFactor - nowa generacja programu do fakturowania
 Name:		XdeFactor-ng
 Version:	%{_snap}
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Applications
@@ -28,11 +28,12 @@ Source10:	http://duch.mimuw.edu.pl/~hunter/deFactor-ng_sql_%{_dbsnap}.tar.gz
 Patch0:		%{name}-includes.patch
 Patch1:		%{name}-modules-includes.patch
 Patch2:		%{name}-sharedir.patch
+Patch3:		%{name}-pic.patch
 URL:		http://defactor-ng.gnu.pl/
-BuildRequires:	freetype-devel
-BuildRequires:	glib2-devel
-BuildRequires:	gtk+2-devel
-BuildRequires:	pango-devel
+BuildRequires:	autoconf >= 2.13
+BuildRequires:	automake
+BuildRequires:	glib2-devel >= 2.0.0
+BuildRequires:	gtk+2-devel >= 2.0.0
 BuildRequires:	pkgconfig
 BuildRequires:	postgresql-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -68,9 +69,9 @@ Definicja bazy dla XdeFactor.
 %patch0 -p0
 #%patch1 -p1
 #%patch2 -p1
+%patch3 -p1
 
 %build
-
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
@@ -84,9 +85,7 @@ Definicja bazy dla XdeFactor.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/defactor-ng/x/modules/,%{_bindir},%{_datadir}/%{name}/images,%{_libdir}}
-install -d $RPM_BUILD_ROOT/usr/share/%{name}
-
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/defactor-ng/x/modules,%{_bindir},%{_datadir}/%{name}/images,%{_libdir}}
 
 install src/xdefactor-ng $RPM_BUILD_ROOT%{_bindir}
 install conf/logo.jpg $RPM_BUILD_ROOT%{_datadir}/%{name}/images
@@ -100,10 +99,8 @@ for i in			\
 	views.sql		\
 	triggers.sql		\
 	struct.sql		\
-	sample.sql		\
-	readme.html		\
-	pgcrypto.sql.dist	\
-	pgcrypto.sql		\
+	triggers.sql		\
+	user_perms.sql		\
 	perms.sql.dist		\
 	install.sh.dist		\
 	init.sql.dist		\
@@ -115,18 +112,18 @@ for i in			\
 	Makefile;
 
 do 
-	install defactor-ng_sql/$i  $RPM_BUILD_ROOT/usr/share/%{name}/
+	install deFactor-ng_sql/$i  $RPM_BUILD_ROOT%{_datadir}/%{name}
 done
 
 cd src/modules
 
 for i in %{_modules}; do
- cd $i
-for j in *.so; do
-  install $j $RPM_BUILD_ROOT%{_libdir}
- done
- install *.conf $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules
- cd ..
+	cd $i
+	for j in *.so; do
+		install $j $RPM_BUILD_ROOT%{_libdir}
+	done
+	install *.conf $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules
+	cd ..
 done
 
 %clean
@@ -151,5 +148,5 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/modules/*.conf
 
 %files database
-%dir /usr/share/%{name}
-/usr/share/%{name}/*
+%defattr(644,root,root,755)
+%{_datadir}/%{name}
