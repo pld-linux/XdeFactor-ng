@@ -33,7 +33,7 @@ URL:		http://defactor-ng.gnu.pl/
 BuildRequires:	autoconf >= 2.13
 BuildRequires:	automake
 BuildRequires:	glib2-devel >= 2.0.0
-BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	gtk+2-devel >= 1:2.0.0
 BuildRequires:	pkgconfig
 BuildRequires:	postgresql-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
