@@ -8,7 +8,7 @@ Summary:	XdeFactor - New Generation
 Summary(pl):	XdeFactor - Nowa Generacja
 Name:		XdeFactor-ng
 Version:	%{_snap}
-Release:	0.4
+Release:	0.5
 License:	GPL
 Group:		Applications
 BuildRequires:	glib2-devel
@@ -119,7 +119,7 @@ done
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/defactor-ng/x/modules/,%{_bindir},%{_libdir}/xdefactor-ng/,%{_datadir}/%{name}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/defactor-ng/x/modules/,%{_bindir},%{_datadir}/%{name},%{_libdir}}
 
 install src/xdefactor-ng $RPM_BUILD_ROOT/%{_bindir}/
 install conf/logo.jpg $RPM_BUILD_ROOT/%{_datadir}/%{name}/
@@ -135,98 +135,85 @@ cd src/modules
 for i in %{_modules}; do
  cd $i
 for j in *.so; do
-  install $j $RPM_BUILD_ROOT%{_libdir}/xdefactor-ng/
+  install $j $RPM_BUILD_ROOT%{_libdir}/
  done
  install *.conf $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules/
  cd ..
 done
 
-%post   
-echo %{_libdir}/xdefactor-ng>> %{_sysconfdir}/ld.so.conf
-/sbin/ldconfig
+%post -p /sbin/ldconfig
 
-%postun
-cat %{_sysconfdir}/ld.so.conf | grep -v xdefactor-ng > /tmp/ld.so.conf.tmp
-mv /tmp/ld.so.conf.tmp %{_sysconfdir}/ld.so.conf
-/sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 # CLIENTS
 %post module-clients
 echo "/modules/Clients.conf" >> %{_sysconfdir}/defactor-ng/x/modules.conf
 echo "libxdef_clients.so" >> %{_sysconfdir}/defactor-ng/x/modules.conf 
-chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
-
 %postun module-clients
-cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i clients > /tmp/xdf-modules.conf.tmp
-mv /tmp/xdf-modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
-chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
+umask 022
+cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i clients > %{_sysconfdir}/defactor-ng/x/modules.conf.tmp
+mv %{_sysconfdir}/defactor-ng/x/modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
 # GOODS
 %post module-goods
 echo "/modules/Goods.conf" >> %{_sysconfdir}/defactor-ng/x/modules.conf
 echo "libxdef_goods.so" >> %{_sysconfdir}/defactor-ng/x/modules.conf
-chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
 %postun module-goods
-cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i goods > /tmp/xdf-modules.conf.tmp
-mv /tmp/xdf-modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
-chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
+umask 022
+cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i goods > %{_sysconfdir}/defactor-ng/x/modules.conf.tmp
+mv %{_sysconfdir}/defactor-ng/x/modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
 # INVOICES
 %post module-invoices
 echo "/modules/Invoices.conf" >> %{_sysconfdir}/defactor-ng/x/modules.conf
 echo "libxdef_invoices.so"  >> %{_sysconfdir}/defactor-ng/x/modules.conf
-chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
 %postun module-invoices
-cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i invoices > /tmp/xdf-modules.conf.tmp
-mv /tmp/xdf-modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
-chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
+umask 022
+cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i invoices > %{_sysconfdir}/defactor-ng/x/modules.conf.tmp
+mv %{_sysconfdir}/defactor-ng/x/modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
 # MEANS OF TRANSPORT
 %post module-meansoftransport
 echo "/modules/MeansOfTransport.conf" >> %{_sysconfdir}/defactor-ng/x/modules.conf
 echo "libxdef_meansoftransport.so"  >> %{_sysconfdir}/defactor-ng/x/modules.conf
-chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
 %postun module-meansoftransport
-cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i meansoftransport > /tmp/xdf-modules.conf.tmp
-mv /tmp/xdf-modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
-chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
+umask 022
+cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i meansoftransport > %{_sysconfdir}/defactor-ng/x/modules.conf.tmp
+mv %{_sysconfdir}/defactor-ng/x/modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
 # STORES
 %post module-stores
 echo "/modules/Stores.conf" >> %{_sysconfdir}/defactor-ng/x/modules.conf
 echo "libxdef_stores.so"  >> %{_sysconfdir}/defactor-ng/x/modules.conf
-chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
 %postun module-stores
-cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i stores > /tmp/xdf-modules.conf.tmp
-mv /tmp/xdf-modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
-chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
+umask 022
+cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i stores > %{_sysconfdir}/defactor-ng/x/modules.conf.tmp
+mv %{_sysconfdir}/defactor-ng/x/modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
 # ARCHIVE INVOICES
 %post module-archiveinvoices
 echo "/modules/ArchiveInvoices.conf" >> %{_sysconfdir}/defactor-ng/x/modules.conf
 echo "libxdef_archiveinvoices.so"  >> %{_sysconfdir}/defactor-ng/x/modules.conf
-chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
 %postun module-archiveinvoices
-cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i archiveinvoices > /tmp/xdf-modules.conf.tmp
-mv /tmp/xdf-modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
-chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
+cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i archiveinvoices > %{_sysconfdir}/defactor-ng/x/modules.conf.tmp
+mv %{_sysconfdir}/defactor-ng/x/modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
 %clean
@@ -242,36 +229,36 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/defactor-ng/x/modules/Login.conf
 %{_sysconfdir}/defactor-ng/x/modules/Logout.conf
 %{_sysconfdir}/defactor-ng/x/modules/About.conf
-%{_libdir}/xdefactor-ng/libxdef_login.so
-%{_libdir}/xdefactor-ng/libxdef_logout.so
-%{_libdir}/xdefactor-ng/libxdef_about.so
+%{_libdir}/libxdef_login.so
+%{_libdir}/libxdef_logout.so
+%{_libdir}/libxdef_about.so
 
 %files module-clients
 %defattr(644,root,root,755)
-%{_libdir}/xdefactor-ng/libxdef_clients.so
+%{_libdir}/libxdef_clients.so
 %{_sysconfdir}/defactor-ng/x/modules/Clients.conf
 
 %files module-goods
 %defattr(644,root,root,755)
-%{_libdir}/xdefactor-ng/libxdef_goods.so
+%{_libdir}/libxdef_goods.so
 %{_sysconfdir}/defactor-ng/x/modules/Goods.conf
 
 %files module-invoices
 %defattr(644,root,root,755)
-%{_libdir}/xdefactor-ng/libxdef_invoices.so
+%{_libdir}/libxdef_invoices.so
 %{_sysconfdir}/defactor-ng/x/modules/Invoices.conf
 
 %files module-meansoftransport
 %defattr(644,root,root,755)
-%{_libdir}/xdefactor-ng/libxdef_meansoftransport.so
+%{_libdir}/libxdef_meansoftransport.so
 %{_sysconfdir}/defactor-ng/x/modules/MeansOfTransport.conf
 
 %files module-stores
 %defattr(644,root,root,755)
-%{_libdir}/xdefactor-ng/libxdef_stores.so
+%{_libdir}/libxdef_stores.so
 %{_sysconfdir}/defactor-ng/x/modules/Stores.conf
 
 %files module-archiveinvoices
 %defattr(644,root,root,755)
-%{_libdir}/xdefactor-ng/libxdef_archiveinvoices.so
+%{_libdir}/libxdef_archiveinvoices.so
 %{_sysconfdir}/defactor-ng/x/modules/ArchiveInvoices.conf
