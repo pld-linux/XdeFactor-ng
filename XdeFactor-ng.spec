@@ -1,7 +1,8 @@
 #
 # TODO:
-# do defactor-ng.spec with automagical script which
-# configure our databases to work with XdeFactor-ng or phpDeFactor-ng
+# - do defactor-ng_sql.spec with automagical script which
+#   configure our databases to work with XdeFactor-ng or phpDeFactor-ng
+# - add user ksiegowy (accounter) to whole distribution ?
 #
 %define		_snap	20030212
 %define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
