@@ -12,7 +12,7 @@ Summary:	XdeFactor - New Generation of program to make invoices
 Summary(pl):	XdeFactor - nowa generacja programu do fakturowania
 Name:		XdeFactor-ng
 Version:	%{_snap}
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		Applications
@@ -42,7 +42,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This is nice program to makeing invoices, service clients, service
 stores, service goods, service means of transport, service archive
 invoices. It's based on GTK+2 library.
-You will need access to postgresql database. Sample structures are
+
+You will need access to PostgreSQL database. Sample structures are
 given in the %{name}-database package.
 
 %description -l pl
@@ -50,19 +51,21 @@ Jest to ca³kiem przyjemny program do fakturowania, obs³ugi klientów,
 obs³ugi magazynów, zarz±dzania us³ugami/towarami, zarz±dzania ¶rodkami
 transportu, zarz±dzania fakturami archiwalnymi. Jest on oparty o
 bibliotekê GTK+2.
-Bêdzie potrzebny dostêp do bazy danych postgresql. Przyk³adowa
+
+Potrzebny jest dostêp do bazy danych PostgreSQL. Przyk³adowa
 struktura bazy znajduje siê w paczce %{name}-database.
 
 %package database
 Summary:	Database specs for XdeFactor
-Summary(pl):	Definicja bazy dla XdeFactor
+Summary(pl):	Definicja bazy dla XdeFactora
 Group:		Applications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description	database
+%description database
 Database definition for XdeFactor.
 
-%description -l pl database
-Definicja bazy dla XdeFactor.
+%description database -l pl
+Definicja bazy dla XdeFactora.
 
 %prep
 %setup -q -n %{name} -a 10
@@ -149,4 +152,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files database
 %defattr(644,root,root,755)
-%{_datadir}/%{name}
+%{_datadir}/%{name}/*
+%exclude %{_datadir}/%{name}/images
