@@ -1,6 +1,6 @@
 #
 # TODO:
-# summary, desc, do defactor-ng.spec with automagical script which
+# do defactor-ng.spec with automagical script which
 # configure our databases to work with XdeFactor-ng or phpDeFactor-ng
 #
 %define		_snap	20030212
@@ -9,7 +9,7 @@ Summary:	XdeFactor - New Generation of program to make invoices
 Summary(pl):	XdeFactor - Nowa Generacja programu do fakturowania
 Name:		XdeFactor-ng
 Version:	%{_snap}
-Release:	0.7
+Release:	1
 License:	GPL
 Group:		Applications
 BuildRequires:	glib2-devel
