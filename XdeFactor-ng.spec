@@ -5,11 +5,11 @@
 #
 %define		_snap	20030212
 %define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
-Summary:	XdeFactor - New Generation of program do invoices
+Summary:	XdeFactor - New Generation of program to make invoices
 Summary(pl):	XdeFactor - Nowa Generacja programu do fakturowania
 Name:		XdeFactor-ng
 Version:	%{_snap}
-Release:	0.6
+Release:	0.7
 License:	GPL
 Group:		Applications
 BuildRequires:	glib2-devel
@@ -24,14 +24,19 @@ Source1:	%{name}.conf
 Source2:	%{name}-modules.conf
 Patch0:		%{name}-includes.patch
 Patch1:		%{name}-modules-includes.patch
+Patch2:		%{name}-sharedir.patch
 URL:		http://defactor-ng.gnu.pl/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
+This is nice program to makeing invoices, service clients, service
+stores, service goods, service means of transport, service archive
+invoices. It's based on GTK+2 library.
 
 %description -l pl
-Ca³kiem s³odki program do fakturowania, obs³ugi klientów, sprzeda¿y
-i nie wiem czego jeszcze, oparty o GTK+2.
+Ca³kiem przyjemny program do fakturowania, obs³ugi klientów, obs³ugi
+magazynów, zarz±dzania us³ugami/towarami, zarz±dzania ¶rodkami transportu,
+zarz±dzania fakturami archiwalnymi. Jest on oparty o bibliotekê GTK+2.
 
 %package module-clients
 Summary:	XdeFactor - Clients module
@@ -109,6 +114,7 @@ Tem modu³ s³y¿y do operacji na archiwalnych fakturach.
 %setup -q -n xdefactor-ng
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 cd src
@@ -124,11 +130,11 @@ done
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/defactor-ng/x/modules/,%{_bindir},%{_datadir}/%{name},%{_libdir}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/defactor-ng/x/modules/,%{_bindir},%{_datadir}/%{name}/images,%{_libdir}}
 
 install src/xdefactor-ng $RPM_BUILD_ROOT/%{_bindir}/
-install conf/logo.jpg $RPM_BUILD_ROOT/%{_datadir}/%{name}/
-install conf/modules.conf.example $RPM_BUILD_ROOT/%{_datadir}/%{name}/
+install conf/logo.jpg $RPM_BUILD_ROOT/%{_datadir}/%{name}/images/
+#install conf/modules.conf.example $RPM_BUILD_ROOT/%{_datadir}/%{name}/
 install conf/*.conf $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/
 install conf/host.name $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/
 cat %{SOURCE1} >> $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/xdefactor-ng.conf
@@ -226,9 +232,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS README
+%doc AUTHORS README conf/modules.conf.example
 %attr(755,root,root) %{_bindir}/xdefactor-ng
-%{_datadir}/%{name}/
+%{_datadir}/%{name}/images/logo.jpg
 %{_sysconfdir}/defactor-ng/x/*.conf
 %{_sysconfdir}/defactor-ng/x/host.name
 %{_sysconfdir}/defactor-ng/x/modules/Login.conf
