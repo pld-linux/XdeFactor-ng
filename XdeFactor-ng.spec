@@ -54,7 +54,7 @@ struktura bazy znajduje siê w paczce %{name}-database.
 
 %package database
 Summary:	Database specs for XdeFactor
-Summary(pl);	Definicja bazy dla XdeFactor
+Summary(pl):	Definicja bazy dla XdeFactor
 Group:		Applications
 
 %description	database
