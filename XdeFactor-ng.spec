@@ -84,13 +84,19 @@ echo %{_libdir}/xdefactor-ng>> %{_sysconfdir}/ld.so.conf
 cat %{_sysconfdir}/ld.so.conf | grep -v xdefactor-ng > /tmp/ld.so.conf.tmp
 mv /tmp/ld.so.conf.tmp %{_sysconfdir}/ld.so.conf
 
+/sbin/ldconfig
+
 %post module-login
 echo "/modules/Login.conf" >> %{_sysconfdir}/defactor-ng/x/modules.conf
 echo "libxdef_login.so" >> %{_sysconfdir}/defactor-ng/x/modules.conf
+chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
+/sbin/ldconfig
 
 %postun module-login
 cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i login > /tmp/xdf-modules.conf.tmp
 mv /tmp/xdf-modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
+chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
+/sbin/ldconfig
 
 %clean
 #rm -rf $RPM_BUILD_ROOT
