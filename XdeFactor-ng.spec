@@ -9,7 +9,7 @@
 %define		_dbsnap	2004_04_08
 %define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
 Summary:	XdeFactor - New Generation of program to make invoices
-Summary(pl):	XdeFactor - Nowa Generacja programu do fakturowania
+Summary(pl):	XdeFactor - nowa generacja programu do fakturowania
 Name:		XdeFactor-ng
 Version:	%{_snap}
 Release:	1
@@ -45,21 +45,23 @@ You will need access to postgresql database. Sample structures are
 given in the %{name}-database package.
 
 %description -l pl
-Ca³kiem przyjemny program do fakturowania, obs³ugi klientów, obs³ugi
-magazynów, zarz±dzania us³ugami/towarami, zarz±dzania ¶rodkami
+Jest to ca³kiem przyjemny program do fakturowania, obs³ugi klientów,
+obs³ugi magazynów, zarz±dzania us³ugami/towarami, zarz±dzania ¶rodkami
 transportu, zarz±dzania fakturami archiwalnymi. Jest on oparty o
 bibliotekê GTK+2.
-Bêdziesz potrzebowa³ dostêpu do bazy danych postgresql. Przyk³adowa
+Bêdzie potrzebny dostêp do bazy danych postgresql. Przyk³adowa
 struktura bazy znajduje siê w paczce %{name}-database.
 
 %package database
-Summary: Database specs for XdeFactor
+Summary:	Database specs for XdeFactor
+Summary(pl);	Definicja bazy dla XdeFactor
 Group:		Applications
-%description database
-%Database definition for XdeFactor
-%description -l pl database
-definicja bazy dla XdeFactor
 
+%description	database
+Database definition for XdeFactor.
+
+%description -l pl database
+Definicja bazy dla XdeFactor.
 
 %prep
 %setup -q -n %{name} -a 10
