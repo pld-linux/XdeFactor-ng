@@ -1,16 +1,15 @@
 #
 # TODO:
 # summary, desc, more BRs ?, maybe some build fix ?, 
-# config files
+# config files (look at src/modules/install_modules.sh)
 #
 %define		_snap	20030212
-%define		_modules login logout about clients goods invoices
-#means_of_transport stores archive_invoices
+%define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
 Summary:	XdeFactor - New Generation
 Summary(pl):	XdeFactor - Nowa Generacja
 Name:		XdeFactor-ng
 Version:	%{_snap}
-Release:	0.2
+Release:	0.3
 License:	GPL
 Group:		Applications
 BuildRequires:	glib2-devel
@@ -28,6 +27,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 
 %description -l pl
+Ca³kiem s³odki program do fakturowania, obs³ugi klientów, sprzeda¿y
+i nie wiem czego jeszcze, oparty o GTK+2.
 
 %package module-login
 Summary:	XdeFactor - Login Module
@@ -66,7 +67,7 @@ About module.
 Modu³ "O programie".
 
 %package module-clients
-Summary:	XdeFactor - Clients Module
+Summary:	XdeFactor - Clients module
 Summary(pl):	XdeFactor - Modu³ obs³ugi klientów
 Group:          Applications
 Requires:       %{name} = %{version}
@@ -100,6 +101,42 @@ With this module you can prepare invoice.
 
 %description module-invoices -l pl
 Dziêki temu modu³owi bêdziesz móg³ wystawiaæ faktury VAT.
+
+%package module-meansoftransport
+Summary:	XdeFactor - Means Of Transport module
+Summary(pl):	XdeFactor - modu³ ¶rodków transportów
+Group:		Applications
+Requires:	%{name} = %{version}
+
+%description module-meansoftransport
+This module manage means of transport.
+
+%description module-meansoftransport
+Modu³ odpowiedzialny jest za operacje na ¶rodkach transportu.
+
+%package module-stores
+Summary:	XdeFactor - Stores module
+Summary(pl):	XdeFactor - modu³ magazynu
+Group:		Applications
+Requires:	%{name} = %{version}
+
+%description module-stores
+This module manage stores.
+
+%description module-stores -l pl
+Jest to modu³ do obs³ugi magazynu
+
+%package module-archiveinvoices
+Summary:	XdeFactor - Archive Invoices module
+Summary(pl):	XdeFactor - modu³ operacji na archiwalnych fakturach
+Group:		Applications
+Requires:	%{name} = %{version}
+
+%description module-archiveinvoices
+This module allow to works on archived invoices.
+
+%description module-archiveinvoices -l pl
+Tem modu³ s³y¿y do operacji na archiwalnych fakturach.
 
 %prep
 %setup -q -n xdefactor-ng
@@ -219,6 +256,37 @@ mv /tmp/xdf-modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
 chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
 /sbin/ldconfig
 
+# MEANS OF TRANSPORT
+%post module-meansoftransport
+echo "/modules/MeansOfTransport.conf" >> %{_sysconfdir}/defactor-ng/x/modules.conf
+echo "libxdef_meansoftransport.so"  >> %{_sysconfdir}/defactor-ng/x/modules.conf
+                                                                                
+%postun module-meansoftransport
+cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i meansoftransport > /tmp/xdf-modules.conf.tmp
+mv /tmp/xdf-modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
+chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
+/sbin/ldconfig
+
+# STORES
+%post module-stores
+echo "/modules/Stores.conf" >> %{_sysconfdir}/defactor-ng/x/modules.conf
+echo "libxdef_stores.so"  >> %{_sysconfdir}/defactor-ng/x/modules.conf                                                                                
+%postun module-stores
+cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i stores > /tmp/xdf-modules.conf.tmp
+mv /tmp/xdf-modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
+chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
+/sbin/ldconfig
+
+# ARCHIVE INVOICES
+%post module-archiveinvoices
+echo "/modules/ArchiveInvoices.conf" >> %{_sysconfdir}/defactor-ng/x/modules.conf
+echo "libxdef_archiveinvoices.so"  >> %{_sysconfdir}/defactor-ng/x/modules.conf                                                                                
+%postun module-archiveinvoices
+cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i archiveinvoices > /tmp/xdf-modules.conf.tmp
+mv /tmp/xdf-modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
+chmod 644 %{_sysconfdir}/defactor-ng/x/modules.conf
+/sbin/ldconfig
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -259,3 +327,18 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/xdefactor-ng/libxdef_invoices.so
 %{_sysconfdir}/defactor-ng/x/modules/Invoices.conf
+
+%files module-meansoftransport
+%defattr(644,root,root,755)
+%{_libdir}/xdefactor-ng/libxdef_meansoftransport.so
+%{_sysconfdir}/defactor-ng/x/modules/MeansOfTransport.conf
+
+%files module-stores
+%defattr(644,root,root,755)
+%{_libdir}/xdefactor-ng/libxdef_stores.so
+%{_sysconfdir}/defactor-ng/x/modules/Stores.conf
+
+%files module-archiveinvoices
+%defattr(644,root,root,755)
+%{_libdir}/xdefactor-ng/libxdef_archiveinvoices.so
+%{_sysconfdir}/defactor-ng/x/modules/ArchiveInvoices.conf
