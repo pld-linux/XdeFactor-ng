@@ -4,14 +4,15 @@
 # conditional build - maybe subpackages with sperate modules ?
 # 
 %define		_snap	20030212
-%define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
+#%define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
+%define		_modules login
 Summary:	XdeFactor - New Generation
 Summary(pl):	XdeFactor - Nowa Generacja
 Name:		XdeFactor-ng
 Version:	%{_snap}
 Release:	0.1
 License:	GPL
-Group:		Bzium
+Group:		Applications
 BuildRequires:	glib2-devel
 BuildRequires:	postgresql-devel
 Prereq: 	/sbin/ldconfig
@@ -24,6 +25,16 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 
 %description -l pl
+
+%package module-login
+Summary:	XdeFactor - Login Module
+Summary(pl):	XdeFacotr - Modó³ logowania
+Group:		Applications
+Requires:	%{name} = %{version}
+
+%description module-login
+
+%description module-login -l pl
 
 %prep
 %setup -q -n xdefactor-ng
@@ -58,7 +69,6 @@ for i in %{_modules}; do
  cd $i
 for j in *.so; do
   install $j $RPM_BUILD_ROOT%{_libdir}/xdefactor-ng/
-  echo "$j" >> $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules.conf
  done
  install *.conf $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules/
  cd ..
@@ -74,6 +84,14 @@ echo %{_libdir}/xdefactor-ng>> %{_sysconfdir}/ld.so.conf
 cat %{_sysconfdir}/ld.so.conf | grep -v xdefactor-ng > /tmp/ld.so.conf.tmp
 mv /tmp/ld.so.conf.tmp %{_sysconfdir}/ld.so.conf
 
+%post module-login
+echo "/modules/Login.conf" >> %{_sysconfdir}/defactor-ng/x/modules.conf
+echo "libxdef_login.so" >> %{_sysconfdir}/defactor-ng/x/modules.conf
+
+%postun module-login
+cat %{_sysconfdir}/defactor-ng/x/modules.conf | grep -v -i login > /tmp/xdf-modules.conf.tmp
+mv /tmp/xdf-modules.conf.tmp %{_sysconfdir}/defactor-ng/x/modules.conf
+
 %clean
 #rm -rf $RPM_BUILD_ROOT
 
@@ -82,5 +100,11 @@ mv /tmp/ld.so.conf.tmp %{_sysconfdir}/ld.so.conf
 %doc AUTHORS README
 %attr(755,root,root) %{_bindir}/xdefactor-ng
 %{_datadir}/%{name}/
-%{_sysconfdir}/defactor-ng/x/
-%{_libdir}/xdefactor-ng/
+%{_sysconfdir}/defactor-ng/x/*.conf
+%{_sysconfdir}/defactor-ng/x/host.name
+#%{_libdir}/xdefactor-ng/
+
+%files module-login
+%defattr(644,root,root,755)
+%{_libdir}/xdefactor-ng/libxdef_login.so
+%{_sysconfdir}/defactor-ng/x/modules/Login.conf
