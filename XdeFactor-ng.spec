@@ -19,6 +19,7 @@ Source2:	%{_origname}-modules.conf
 Patch0:		%{_origname}-includes.patch
 Patch1:		%{_origname}-uid_gid_log.patch
 Patch2:		%{_origname}-pic.patch
+Patch3:		%{_origname}-ac_fix.patch
 URL:		http://defactor-ng.gnu.pl/
 BuildRequires:	autoconf >= 2.13
 BuildRequires:	automake
@@ -47,6 +48,7 @@ bibliotekê GTK+2.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__aclocal}
