@@ -1,7 +1,6 @@
 #
 # TODO:
 # summary, desc, more BRs ?, maybe some build fix ?, 
-# config files (look at src/modules/install_modules.sh)
 #
 %define		_snap	20030212
 %define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
@@ -19,6 +18,7 @@ Requires:       %{name}-module-logout = %{version}
 Requires:	%{name}-module-about = %{version}
 Prereq: 	/sbin/ldconfig
 Source0:	http://defactor-ng.gnu.pl/XdeFactor-ng_snapshots/%{name}_%{version}.tar.gz
+Source1:	%{name}.conf
 Patch0:		%{name}-includes.patch
 Patch1:		%{name}-modules-includes.patch
 URL:		http://defactor-ng.gnu.pl/
@@ -164,6 +164,7 @@ install conf/logo.jpg $RPM_BUILD_ROOT/%{_datadir}/%{name}/
 install conf/modules.conf.example $RPM_BUILD_ROOT/%{_datadir}/%{name}/
 install conf/*.conf $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/
 install conf/host.name $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/
+cat %{SOURCE1} >> $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/xdefactor-ng.conf
 
 cd src/modules
 	 
