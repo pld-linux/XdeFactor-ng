@@ -1,18 +1,23 @@
 #
 # TODO:
-# summary, desc, more BRs ?, maybe some build fix ?, 
+# summary, desc, do defactor-ng.spec with automagical script which
+# configure our databases to work with XdeFactor-ng or phpDeFactor-ng
 #
 %define		_snap	20030212
 %define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
-Summary:	XdeFactor - New Generation
-Summary(pl):	XdeFactor - Nowa Generacja
+Summary:	XdeFactor - New Generation of program do invoices
+Summary(pl):	XdeFactor - Nowa Generacja programu do fakturowania
 Name:		XdeFactor-ng
 Version:	%{_snap}
-Release:	0.5
+Release:	0.6
 License:	GPL
 Group:		Applications
 BuildRequires:	glib2-devel
 BuildRequires:	postgresql-devel
+BuildRequires:	gtk+2-devel
+BuildRequires:	pango-devel
+BuildRequires:	pkgconfig
+BuildRequires:	freetype-devel
 Prereq: 	/sbin/ldconfig
 Source0:	http://defactor-ng.gnu.pl/XdeFactor-ng_snapshots/%{name}_%{version}.tar.gz
 Source1:	%{name}.conf
