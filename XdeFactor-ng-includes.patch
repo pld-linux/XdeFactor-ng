@@ -1,14 +1,59 @@
---- xdefactor-ng/src/callbacks.h.orig	Sun Feb 16 14:24:27 2003
-+++ xdefactor-ng/src/callbacks.h	Sun Feb 16 14:24:43 2003
-@@ -8,9 +8,9 @@
- #include <gtk/gtk.h>
- #include <pango/pango.h>
+--- /home/users/hunter/.vim/backup/callbacks.h~	2004-04-08 18:41:13.000000000 +0200
++++ src/callbacks.h	2004-04-08 18:41:13.000000000 +0200
+@@ -9,7 +9,7 @@
  #include <fcntl.h>
--#include <glib/glib.h>
-+#include <glib.h>
+ #include <glib.h>
  #include <dlfcn.h>
 -#include <postgresql/libpq-fe.h>
 +#include <libpq-fe.h>
  #include <pwd.h>
  #include <unistd.h>
  #include <errno.h>
+--- /home/users/hunter/.vim/backup/moduleArchiveInvoices.h~	2004-04-08 18:44:47.000000000 +0200
++++ src/modules/archive_invoices/moduleArchiveInvoices.h	2004-04-08 18:44:47.000000000 +0200
+@@ -6,7 +6,7 @@
+ #include <stdio.h>
+ #include <gdk/gdkkeysyms.h>
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include "../common/defs.h"
+ 
+ void findInvoices (GtkWidget *widget, xdfInvConnModule *conn_mod);
+--- /home/users/hunter/.vim/backup/moduleClients.h~	2004-04-08 18:53:27.000000000 +0200
++++ src/modules/clients/moduleClients.h	2004-04-08 18:53:27.000000000 +0200
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <string.h>
+ #include <errno.h>
+ #include <fcntl.h>
+--- /home/users/hunter/.vim/backup/moduleGoods.h~	2004-04-08 18:55:15.000000000 +0200
++++ src/modules/goods/moduleGoods.h	2004-04-08 18:55:15.000000000 +0200
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+--- /home/users/hunter/.vim/backup/moduleStores.h~	2004-04-08 18:58:12.000000000 +0200
++++ src/modules/stores/moduleStores.h	2004-04-08 18:58:12.000000000 +0200
+@@ -3,7 +3,7 @@
+ #include <gtk/gtk.h>
+ #include <unistd.h>
+ #include <glib.h>
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <string.h>
+ #include "../common/defs.h"
+ 
+--- /home/users/hunter/.vim/backup/xdfPQexec.c~	2004-04-08 19:00:08.000000000 +0200
++++ src/xdfPQexec.c	2004-04-08 19:00:08.000000000 +0200
+@@ -1,4 +1,4 @@
+-#include <postgresql/libpq-fe.h>
++#include <libpq-fe.h>
+ #include <string.h>
+ /*
+    funkcja wrapuj±ca PQexec, wy¶wietlaj±ca ewentualne b³êdy w dialogu
