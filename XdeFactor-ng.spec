@@ -66,7 +66,7 @@ install src/xdefactor-ng $RPM_BUILD_ROOT%{_bindir}
 install conf/logo.jpg $RPM_BUILD_ROOT%{_datadir}/%{name}/images
 #install conf/modules.conf.example $RPM_BUILD_ROOT%{_datadir}/%{name}
 install conf/*.conf $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x
-install conf/host.name $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x
+#install conf/host.name $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x
 cat %{SOURCE1} >> $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/xdefactor-ng.conf
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules.conf
 
@@ -98,6 +98,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/defactor-ng
 %dir %{_sysconfdir}/defactor-ng/x
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/*.conf
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/host.name
+#%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/host.name
 %dir %{_sysconfdir}/defactor-ng/x/modules
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/modules/*.conf
