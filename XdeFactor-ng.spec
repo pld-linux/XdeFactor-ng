@@ -3,6 +3,7 @@
 # - do defactor-ng_sql.spec with automagical script which
 #   configure our databases to work with XdeFactor-ng or phpDeFactor-ng
 # - add user ksiegowy (accounter) to whole distribution ?
+# - wants to use /var/log/xdefactor-ng.log - teach him not to
 #
 %define		_snap	27022004
 %define		_dbsnap	20030212
@@ -76,8 +77,7 @@ definicja bazy dla XdeFactor
 	--with-group=nogroup
 
 %{__make} \
-	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags}"
+	CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
