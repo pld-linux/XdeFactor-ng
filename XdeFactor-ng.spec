@@ -14,6 +14,7 @@ Release:	2
 License:	GPL
 Group:		Applications
 Source0:	http://defactor-ng.gnu.pl/XdeFactor-ng_snapshots/%{name}_%{version}.tar.gz
+# Source0-md5:	94f7f1abfafbff21183a7d3ee40f9d95
 Source1:	%{name}.conf
 Source2:	%{name}-modules.conf
 Patch0:		%{name}-includes.patch
