@@ -12,3 +12,193 @@ diff -Nura XdeFactor-ng.bef/configure.in XdeFactor-ng.aft/configure.in
  fi
  
  #dnl xdefactor user
+diff -Nura XdeFactor-ng.bef/src/modules/authors/Makefile XdeFactor-ng.aft/src/modules/authors/Makefile
+--- XdeFactor-ng.bef/src/modules/authors/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/authors/Makefile	2004-04-13 14:25:04.000000000 +0200
+@@ -1,10 +1,12 @@
+ include ../common/rules.mak
+ 
++CC = cc
++LD = ld
+ OBJECT = libxdef_Authors.so
+ 
+ all:
+-	gcc $(CFLAGS) -c moduleAuthors.c
+-	ld $(LDFLAGS) -o libxdef_Authors.so moduleAuthors.o 
++	$(CC) $(CFLAGS) -c moduleAuthors.c
++	$(LD) $(LDFLAGS) -o libxdef_Authors.so moduleAuthors.o 
+ 
+ clean:
+ 	rm -f *.so *.o
+diff -Nura XdeFactor-ng.bef/src/modules/common/calcPrices/Makefile XdeFactor-ng.aft/src/modules/common/calcPrices/Makefile
+--- XdeFactor-ng.bef/src/modules/common/calcPrices/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/common/calcPrices/Makefile	2004-04-13 14:25:18.000000000 +0200
+@@ -1,4 +1,6 @@
+ include ../rules.mak
+ 
++CC = cc
++
+ all:
+-	gcc $(CFLAGS) -c calcPrices.c
++	$(CC) $(CFLAGS) -c calcPrices.c
+diff -Nura XdeFactor-ng.bef/src/modules/common/createInvoice/Makefile XdeFactor-ng.aft/src/modules/common/createInvoice/Makefile
+--- XdeFactor-ng.bef/src/modules/common/createInvoice/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/common/createInvoice/Makefile	2004-04-13 14:25:40.000000000 +0200
+@@ -1,5 +1,7 @@
+ include ../rules.mak
+ 
++CC = cc
++
+ all:
+-	gcc $(CFLAGS) -c createInvoicePS.c
+-	gcc $(CFLAGS) -c createInvoiceTXT.c
++	$(CC) $(CFLAGS) -c createInvoicePS.c
++	$(CC) $(CFLAGS) -c createInvoiceTXT.c
+diff -Nura XdeFactor-ng.bef/src/modules/common/fix5/Makefile XdeFactor-ng.aft/src/modules/common/fix5/Makefile
+--- XdeFactor-ng.bef/src/modules/common/fix5/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/common/fix5/Makefile	2004-04-13 14:25:51.000000000 +0200
+@@ -1,4 +1,6 @@
+ include ../rules.mak
+ 
++CC = cc
++
+ all:
+-	gcc $(CFLAGS) -c libfix5.c
++	$(CC) $(CFLAGS) -c libfix5.c
+diff -Nura XdeFactor-ng.bef/src/modules/common/invoiceNumbers/Makefile XdeFactor-ng.aft/src/modules/common/invoiceNumbers/Makefile
+--- XdeFactor-ng.bef/src/modules/common/invoiceNumbers/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/common/invoiceNumbers/Makefile	2004-04-13 14:26:22.000000000 +0200
+@@ -1,4 +1,6 @@
+ include ../rules.mak
+ 
++CC = cc
++
+ all:
+-	gcc $(CFLAGS) -c invoiceNumbers.c
++	$(CC) $(CFLAGS) -c invoiceNumbers.c
+diff -Nura XdeFactor-ng.bef/src/modules/common/invoiceTax/Makefile XdeFactor-ng.aft/src/modules/common/invoiceTax/Makefile
+--- XdeFactor-ng.bef/src/modules/common/invoiceTax/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/common/invoiceTax/Makefile	2004-04-13 14:26:33.000000000 +0200
+@@ -1,4 +1,6 @@
+ include ../rules.mak
+ 
++CC = cc
++
+ all:
+-	gcc $(CFLAGS) -c invoiceTax.c
++	$(CC) $(CFLAGS) -c invoiceTax.c
+diff -Nura XdeFactor-ng.bef/src/modules/common/inWords/Makefile XdeFactor-ng.aft/src/modules/common/inWords/Makefile
+--- XdeFactor-ng.bef/src/modules/common/inWords/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/common/inWords/Makefile	2004-04-13 14:26:00.000000000 +0200
+@@ -1,4 +1,6 @@
+ include ../rules.mak
+ 
++CC = cc
++
+ all:
+-	gcc $(CFLAGS) -c inWords.c
++	$(CC) $(CFLAGS) -c inWords.c
+diff -Nura XdeFactor-ng.bef/src/modules/common/search/Makefile XdeFactor-ng.aft/src/modules/common/search/Makefile
+--- XdeFactor-ng.bef/src/modules/common/search/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/common/search/Makefile	2004-04-13 14:26:45.000000000 +0200
+@@ -1,4 +1,6 @@
+ include ../rules.mak
+ 
++CC = cc
++
+ all:
+-	gcc $(CFLAGS) -c search.c
++	$(CC) $(CFLAGS) -c search.c
+diff -Nura XdeFactor-ng.bef/src/modules/common/xdfAtof/Makefile XdeFactor-ng.aft/src/modules/common/xdfAtof/Makefile
+--- XdeFactor-ng.bef/src/modules/common/xdfAtof/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/common/xdfAtof/Makefile	2004-04-13 14:26:51.000000000 +0200
+@@ -1,4 +1,6 @@
+ include ../rules.mak
+ 
++CC = cc
++
+ all:
+-	gcc $(CFLAGS) -c xdfAtof.c
++	$(CC) $(CFLAGS) -c xdfAtof.c
+diff -Nura XdeFactor-ng.bef/src/modules/common/xdfDialogMsg/Makefile XdeFactor-ng.aft/src/modules/common/xdfDialogMsg/Makefile
+--- XdeFactor-ng.bef/src/modules/common/xdfDialogMsg/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/common/xdfDialogMsg/Makefile	2004-04-13 14:26:58.000000000 +0200
+@@ -1,4 +1,6 @@
+ include ../rules.mak
+ 
++CC = cc
++
+ all:
+-	gcc $(CFLAGS) -c xdfDialogMsg.c
++	$(CC) $(CFLAGS) -c xdfDialogMsg.c
+diff -Nura XdeFactor-ng.bef/src/modules/common/xdfLog/Makefile XdeFactor-ng.aft/src/modules/common/xdfLog/Makefile
+--- XdeFactor-ng.bef/src/modules/common/xdfLog/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/common/xdfLog/Makefile	2004-04-13 14:27:04.000000000 +0200
+@@ -1,4 +1,5 @@
+ include ../rules.mak
++CC = cc
+ 
+ all:
+-	gcc $(CFLAGS) -c xdfLog.c
++	$(CC) $(CFLAGS) -c xdfLog.c
+diff -Nura XdeFactor-ng.bef/src/modules/common/xdfPQexec/Makefile XdeFactor-ng.aft/src/modules/common/xdfPQexec/Makefile
+--- XdeFactor-ng.bef/src/modules/common/xdfPQexec/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/common/xdfPQexec/Makefile	2004-04-13 14:27:08.000000000 +0200
+@@ -1,4 +1,5 @@
+ include ../rules.mak
++CC = cc
+ 
+ all:
+-	gcc $(CFLAGS) -c xdfPQexec.c
++	$(CC) $(CFLAGS) -c xdfPQexec.c
+diff -Nura XdeFactor-ng.bef/src/modules/sample/Makefile XdeFactor-ng.aft/src/modules/sample/Makefile
+--- XdeFactor-ng.bef/src/modules/sample/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/sample/Makefile	2004-04-13 14:27:34.000000000 +0200
+@@ -1,10 +1,12 @@
+ include ../common/rules.mak
++CC = cc
++LD = ld
+ 
+ OBJECT=libxdef_sample.so
+ 
+ all:
+-	gcc $(CFLAGS) -c moduleSample.c `pkg-config gtk+-2.0 --cflags glib-2.0`
+-	ld $(LDFLAGS) -o $(OBJECT) moduleSample.o
++	$(CC) $(CFLAGS) -c moduleSample.c `pkg-config gtk+-2.0 --cflags glib-2.0`
++	$(LD) $(LDFLAGS) -o $(OBJECT) moduleSample.o
+ 
+ clean:
+ 	rm -f *.so *.o
+diff -Nura XdeFactor-ng.bef/src/modules/stores/Makefile XdeFactor-ng.aft/src/modules/stores/Makefile
+--- XdeFactor-ng.bef/src/modules/stores/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/stores/Makefile	2004-04-13 14:28:58.000000000 +0200
+@@ -6,8 +6,8 @@
+ CFLAGS			=	-O2 -Wall `pkg-config gtk+-2.0 --cflags glib-2.0`
+ INSTALL			=	/bin/install -c
+ INSTALL_DATA	=	${INSTALL} -m 644
+-#DESTDIR			=	@DESTDIR@
+-CC					=	gcc
++#DESTDIR		=	@DESTDIR@
++CC			= 	cc	
+ 
+ OBJECT 			=	libxdef_stores.so
+ OBJECT_SRC		=	moduleStores.c showStoresClist.c $(COMMON_LIB)
+diff -Nura XdeFactor-ng.bef/src/modules/unstable/check_numbers/Makefile XdeFactor-ng.aft/src/modules/unstable/check_numbers/Makefile
+--- XdeFactor-ng.bef/src/modules/unstable/check_numbers/Makefile	2004-04-13 14:17:46.000000000 +0200
++++ XdeFactor-ng.aft/src/modules/unstable/check_numbers/Makefile	2004-04-13 14:29:48.000000000 +0200
+@@ -1,10 +1,13 @@
+ include ../../common/rules.mak
+ 
++CC = cc
++LD = ld
++
+ OBJECT=libxdef_numbers.so
+ 
+ all:
+-	gcc $(CFLAGS) -c moduleNumbers.c `pkg-config gtk+-2.0 --cflags glib-2.0`
+-	ld $(LDFLAGS) -o $(OBJECT) moduleNumbers.o
++	$(CC) $(CFLAGS) -c moduleNumbers.c `pkg-config gtk+-2.0 --cflags glib-2.0`
++	$(LD) $(LDFLAGS) -o $(OBJECT) moduleNumbers.o
+ 
+ install:
+ 
