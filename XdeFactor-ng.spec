@@ -5,12 +5,13 @@
 # - add user ksiegowy (accounter) to whole distribution ?
 #
 %define		_snap	27022004
+%define		_dbsnap	20030212
 %define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
 Summary:	XdeFactor - New Generation of program to make invoices
 Summary(pl):	XdeFactor - Nowa Generacja programu do fakturowania
 Name:		XdeFactor-ng
 Version:	%{_snap}
-Release:	0
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications
@@ -20,6 +21,8 @@ Source0:	http://www.xdefactor.netsync.pl/snapshots/%{name}-%{version}.tar.gz
 # Source0-md5:	3f2d7b129b19cbeb79d5fa197b175f4b
 Source1:	%{name}.conf
 Source2:	%{name}-modules.conf
+Source10:	http://defactor-ng.gnu.pl/deFactor-ng_sql_snapshots/deFactor-ng_sql_%{_dbsnap}.tar.gz
+# Source10-md5:	2f442cd5c2d2df8215cbc8965be7740c
 Patch0:		%{name}-includes.patch
 Patch1:		%{name}-modules-includes.patch
 Patch2:		%{name}-sharedir.patch
@@ -36,15 +39,28 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This is nice program to makeing invoices, service clients, service
 stores, service goods, service means of transport, service archive
 invoices. It's based on GTK+2 library.
+You will need access to postgresql database. Sample structures are
+given in the %{name}-database package.
 
 %description -l pl
 Ca³kiem przyjemny program do fakturowania, obs³ugi klientów, obs³ugi
 magazynów, zarz±dzania us³ugami/towarami, zarz±dzania ¶rodkami
 transportu, zarz±dzania fakturami archiwalnymi. Jest on oparty o
 bibliotekê GTK+2.
+Bêdziesz potrzebowa³ dostêpu do bazy danych postgresql. Przyk³adowa
+struktura bazy znajduje siê w paczce %{name}-database.
+
+%package database
+Summary: Database specs for XdeFactor
+Group:		Applications
+%description database
+%Database definition for XdeFactor
+%description -l pl database
+definicja bazy dla XdeFactor
+
 
 %prep
-%setup -q -n %{name}
+%setup -q -n %{name} -a 10
 %patch0 -p0
 #%patch1 -p1
 #%patch2 -p1
@@ -61,6 +77,8 @@ bibliotekê GTK+2.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/defactor-ng/x/modules/,%{_bindir},%{_datadir}/%{name}/images,%{_libdir}}
+install -d $RPM_BUILD_ROOT/usr/share/%{name}
+
 
 install src/xdefactor-ng $RPM_BUILD_ROOT%{_bindir}
 install conf/logo.jpg $RPM_BUILD_ROOT%{_datadir}/%{name}/images
@@ -69,6 +87,28 @@ install conf/*.conf $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x
 #install conf/host.name $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x
 cat %{SOURCE1} >> $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/xdefactor-ng.conf
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules.conf
+
+for i in			\
+	views.sql		\
+	triggers.sql	\
+	struct.sql		\
+	sample.sql		\
+	readme.html		\
+	pgcrypto.sql.dist	\
+	pgcrypto.sql	\
+	perms.sql.dist	\
+	install.sh.dist	\
+	init.sql.dist	\
+	init.sh.dist	\
+	environment		\
+	data.sql		\
+	config_db		\
+	README			\
+	Makefile;
+
+do 
+	install defactor-ng_sql/$i  $RPM_BUILD_ROOT/usr/share/%{name}/
+done
 
 cd src/modules
 
@@ -101,3 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 #%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/host.name
 %dir %{_sysconfdir}/defactor-ng/x/modules
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/modules/*.conf
+
+%files database
+%dir /usr/share/%{name}
+/usr/share/%{name}/*
