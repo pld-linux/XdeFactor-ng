@@ -4,6 +4,7 @@
 # conditional build - maybe subpackages with sperate modules ?
 # 
 %define		_snap	20030212
+%define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
 Summary:	XdeFactor - New Generation
 Summary(pl):	XdeFactor - Nowa Generacja
 Name:		XdeFactor-ng
@@ -13,6 +14,7 @@ License:	GPL
 Group:		Bzium
 BuildRequires:	glib2-devel
 BuildRequires:	postgresql-devel
+Prereq: 	/sbin/ldconfig
 Source0:	http://defactor-ng.gnu.pl/XdeFactor-ng_snapshots/%{name}_%{version}.tar.gz
 Patch0:		%{name}-includes.patch
 Patch1:		%{name}-modules-includes.patch
@@ -32,12 +34,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 cd src
 %{__make} CC="gcc %{rpmcflags}"
 
-MODULES="login logout about clients goods invoices means_of_transport stores \
-	 archive_invoices"
-
 cd modules
 
-for i in $MODULES; do
+for i in %{_modules}; do
  cd $i
  %{__make} CC="gcc %{rpmcflags}"
  cd ..
@@ -54,7 +53,8 @@ install conf/*.conf $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/
 install conf/host.name $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/
 
 cd src/modules
-for i in $MODULES; do
+	 
+for i in %{_modules}; do
  cd $i
 for j in *.so; do
   install $j $RPM_BUILD_ROOT%{_libdir}/xdefactor-ng/
@@ -65,6 +65,14 @@ for j in *.so; do
 done
 
 # i think it should be in XdeFactor-subpackages in post and postun scripts :)
+
+%post   
+echo %{_libdir}/xdefactor-ng>> %{_sysconfdir}/ld.so.conf
+/sbin/ldconfig
+
+%postun
+cat %{_sysconfdir}/ld.so.conf | grep -v xdefactor-ng > /tmp/ld.so.conf.tmp
+mv /tmp/ld.so.conf.tmp %{_sysconfdir}/ld.so.conf
 
 %clean
 #rm -rf $RPM_BUILD_ROOT
