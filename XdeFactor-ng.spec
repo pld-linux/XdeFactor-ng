@@ -56,9 +56,9 @@ install conf/host.name $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/
 cd src/modules
 for i in $MODULES; do
  cd $i
-for i in *.so; do
-  install $i $RPM_BUILD_ROOT%{_libdir}/xdefactor-ng/
-  echo "$i" >> $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules.conf
+for j in *.so; do
+  install $j $RPM_BUILD_ROOT%{_libdir}/xdefactor-ng/
+  echo "$j" >> $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules.conf
  done
  install *.conf $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules/
  cd ..
