@@ -71,8 +71,13 @@ definicja bazy dla XdeFactor
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure --with-user=nobody --with-group=nogroup
-%{__make} CC="%{__cc} %{rpmcflags}"
+%configure \
+	--with-user=nobody \
+	--with-group=nogroup
+
+%{__make} \
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -90,16 +95,16 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules.conf
 
 for i in			\
 	views.sql		\
-	triggers.sql	\
+	triggers.sql		\
 	struct.sql		\
 	sample.sql		\
 	readme.html		\
 	pgcrypto.sql.dist	\
-	pgcrypto.sql	\
-	perms.sql.dist	\
-	install.sh.dist	\
-	init.sql.dist	\
-	init.sh.dist	\
+	pgcrypto.sql		\
+	perms.sql.dist		\
+	install.sh.dist		\
+	init.sql.dist		\
+	init.sh.dist		\
 	environment		\
 	data.sql		\
 	config_db		\
