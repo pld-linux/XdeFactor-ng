@@ -45,17 +45,34 @@ done
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{{%_sysconfdir}/defactor-ng/x/modules/,%{_bindir},%{_libdir}/xdefactor-ng/}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/defactor-ng/x/modules/,%{_bindir},%{_libdir}/xdefactor-ng/,%{_datadir}/%{name}}
 
-install src/xdefactor-ng %{_bindir}
-install conf/* %{_sysconfdir}/defactor-ng/x/
+install src/xdefactor-ng $RPM_BUILD_ROOT/%{_bindir}/
+install conf/logo.jpg $RPM_BUILD_ROOT/%{_datadir}/%{name}/
+install conf/modules.conf.example $RPM_BUILD_ROOT/%{_datadir}/%{name}/
+install conf/*.conf $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/
+install conf/host.name $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/
+
+cd src/modules
+for i in $MODULES; do
+ cd $i
+for i in *.so; do
+  install $i $RPM_BUILD_ROOT%{_libdir}/xdefactor-ng/
+  echo "$i" >> $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules.conf
+ done
+ install *.conf $RPM_BUILD_ROOT%{_sysconfdir}/defactor-ng/x/modules/
+ cd ..
+done
+
+# i think it should be in XdeFactor-subpackages in post and postun scripts :)
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+#rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README
-%attr(755,root,root) %{_bindir}/*
-%{_datadir}/
+%doc AUTHORS README
+%attr(755,root,root) %{_bindir}/xdefactor-ng
+%{_datadir}/%{name}/
 %{_sysconfdir}/defactor-ng/x/
+%{_libdir}/xdefactor-ng/
