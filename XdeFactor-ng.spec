@@ -115,7 +115,7 @@ for i in			\
 	Makefile;
 
 do 
-	install deFactor-ng_sql/$i  $RPM_BUILD_ROOT%{_datadir}/%{name}
+	install deFactor-ng_sql/$i $RPM_BUILD_ROOT%{_datadir}/%{name}
 done
 
 cd src/modules
