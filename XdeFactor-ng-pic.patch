@@ -1,0 +1,163 @@
+--- XdeFactor-ng/src/crypto/Makefile.in.orig	2004-04-11 00:28:18.936884752 +0200
++++ XdeFactor-ng/src/crypto/Makefile.in	2004-04-11 00:28:45.414536819 +0200
+@@ -0,0 +1,45 @@
++
++PROGRAM = md5
++
++CC = @CC@
++CFLAGS = @CFLAGS@ -fPIC
++
++RELFILES = Makefile  test.c md5.c md5.h
++
++all:	$(PROGRAM)
++
++md5:	md5.o test.o
++	$(CC) -o md5 md5.o test.o
++
++
++lint:
++	lint test.c md5.c
++install:
++    
++
++install:
++	echo "nothing to do"
++
++#	The silly stuff with "tr" is to allow directly cutting and
++#	pasting the test cases from RFC 1321.
++check:	$(PROGRAM)
++	./md5 -d"" -otest.out
++	./md5 -d"a" >>test.out
++	./md5 -d"abc" >>test.out
++	./md5 -d"message digest" >>test.out
++	./md5 -d"abcdefghijklmnopqrstuvwxyz" >>test.out
++	./md5 -d"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" >>test.out
++	./md5 -d"12345678901234567890123456789012345678901234567890123456789012345678901234567890" >>test.out
++	@echo "d41d8cd98f00b204e9800998ecf8427e" | tr [a-f] [A-F] >expected.out
++	@echo "0cc175b9c0f1b6a831c399e269772661" | tr [a-f] [A-F] >>expected.out
++	@echo "900150983cd24fb0d6963f7d28e17f72" | tr [a-f] [A-F] >>expected.out
++	@echo "f96b697d7cb7938d525a2f31aaf161d0" | tr [a-f] [A-F] >>expected.out
++	@echo "c3fcd3d76192e4007dfb496cca67e13b" | tr [a-f] [A-F] >>expected.out
++	@echo "d174ab98d277d9f5a5611c2c9f419d9f" | tr [a-f] [A-F] >>expected.out
++	@echo "57edf4a22be3c955ac49da2e2107b67a" | tr [a-f] [A-F] >>expected.out
++	@diff test.out expected.out ; if test $$? -ne 0  ; then \
++	    echo '** md5:  Verification test failed. **' ; else \
++	    echo 'All tests passed.' ; fi
++
++clean:
++	rm -f $(PROGRAM) *.o core
+--- XdeFactor-ng/src/modules/about/Makefile.in.orig	2003-08-24 12:59:33.000000000 +0200
++++ XdeFactor-ng/src/modules/about/Makefile.in	2004-04-11 00:19:34.154699055 +0200
+@@ -1,7 +1,7 @@
+ LIB_DIR			=	@LIB_DIR@
+ CONF_DIR			=	@CONF_DIR@
+ MOD_CONF			=	@MOD_CONF@
+-CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0`
++CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0` -fPIC
+ INSTALL			=	@INSTALL@
+ INSTALL_DATA	=	@INSTALL_DATA@
+ #DESTDIR			=	@DESTDIR@
+--- XdeFactor-ng/src/modules/archive_invoices/Makefile.in.orig	2003-09-16 19:10:59.000000000 +0200
++++ XdeFactor-ng/src/modules/archive_invoices/Makefile.in	2004-04-11 00:20:15.902690191 +0200
+@@ -2,7 +2,7 @@
+ LIB_DIR			=	@LIB_DIR@
+ CONF_DIR			=	@CONF_DIR@
+ MOD_CONF			=	@MOD_CONF@
+-CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0`
++CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0` -fPIC
+ INSTALL			=	@INSTALL@
+ INSTALL_DATA	=	@INSTALL_DATA@
+ #DESTDIR			=	@DESTDIR@
+--- XdeFactor-ng/src/modules/clients/Makefile.in.orig	2003-09-01 23:00:31.000000000 +0200
++++ XdeFactor-ng/src/modules/clients/Makefile.in	2004-04-11 00:24:09.721633185 +0200
+@@ -2,7 +2,7 @@
+ LIB_DIR			=	@LIB_DIR@
+ CONF_DIR			=	@CONF_DIR@
+ MOD_CONF			=	@MOD_CONF@
+-CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0`
++CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0` -fPIC
+ INSTALL			=	@INSTALL@
+ INSTALL_DATA	=	@INSTALL_DATA@
+ #DESTDIR			=	@DESTDIR@
+--- XdeFactor-ng/src/modules/common/rules.mak.in.orig	2004-04-11 00:23:00.629197798 +0200
++++ XdeFactor-ng/src/modules/common/rules.mak.in	2004-04-11 00:23:12.872262577 +0200
+@@ -0,0 +1 @@
++CFLAGS = @CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0` -fPIC
+--- XdeFactor-ng/src/modules/goods/Makefile.in.orig	2003-09-01 23:00:31.000000000 +0200
++++ XdeFactor-ng/src/modules/goods/Makefile.in	2004-04-11 00:24:53.428154724 +0200
+@@ -2,7 +2,7 @@
+ LIB_DIR			=	@LIB_DIR@
+ CONF_DIR			=	@CONF_DIR@
+ MOD_CONF			=	@MOD_CONF@
+-CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0`
++CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0` -fPIC
+ INSTALL			=	@INSTALL@
+ INSTALL_DATA	=	@INSTALL_DATA@
+ #DESTDIR			=	@DESTDIR@
+--- XdeFactor-ng/src/modules/invoices/Makefile.in.orig	2003-09-16 19:10:59.000000000 +0200
++++ XdeFactor-ng/src/modules/invoices/Makefile.in	2004-04-11 00:26:21.935935325 +0200
+@@ -3,7 +3,7 @@
+ CONF_DIR			=	@CONF_DIR@
+ MOD_CONF			=	@MOD_CONF@
+ SHARE_DIR		=	@SHARE_DIR@
+-CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0`
++CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0` -fPIC
+ INSTALL			=	@INSTALL@
+ INSTALL_DATA	=	@INSTALL_DATA@
+ #DESTDIR			=	@DESTDIR@
+--- XdeFactor-ng/src/modules/login/Makefile.in.orig	2003-09-01 23:00:32.000000000 +0200
++++ XdeFactor-ng/src/modules/login/Makefile.in	2004-04-11 00:26:54.971015283 +0200
+@@ -2,7 +2,7 @@
+ LIB_DIR			=	@LIB_DIR@
+ CONF_DIR			=	@CONF_DIR@
+ MOD_CONF			=	@MOD_CONF@
+-CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0`
++CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0` -fPIC
+ INSTALL			=	@INSTALL@
+ INSTALL_DATA	=	@INSTALL_DATA@
+ #DESTDIR			=	@DESTDIR@
+--- XdeFactor-ng/src/modules/logout/Makefile.in.orig	2003-09-01 23:00:32.000000000 +0200
++++ XdeFactor-ng/src/modules/logout/Makefile.in	2004-04-11 00:30:06.085196271 +0200
+@@ -2,7 +2,7 @@
+ LIB_DIR			=	@LIB_DIR@
+ CONF_DIR			=	@CONF_DIR@
+ MOD_CONF			=	@MOD_CONF@
+-CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0`
++CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0` -fPIC
+ INSTALL			=	@INSTALL@
+ INSTALL_DATA	=	@INSTALL_DATA@
+ #DESTDIR			=	@DESTDIR@
+--- XdeFactor-ng/src/modules/means_of_transport/Makefile.in.orig	2003-09-01 23:00:33.000000000 +0200
++++ XdeFactor-ng/src/modules/means_of_transport/Makefile.in	2004-04-11 00:30:32.603838502 +0200
+@@ -2,7 +2,7 @@
+ LIB_DIR			=	@LIB_DIR@
+ CONF_DIR			=	@CONF_DIR@
+ MOD_CONF			=	@MOD_CONF@
+-CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0`
++CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0` -fPIC
+ INSTALL			=	@INSTALL@
+ INSTALL_DATA	=	@INSTALL_DATA@
+ #DESTDIR			=	@DESTDIR@
+--- XdeFactor-ng/src/modules/stores/Makefile.in.orig	2003-09-01 23:00:33.000000000 +0200
++++ XdeFactor-ng/src/modules/stores/Makefile.in	2004-04-11 00:31:38.414060676 +0200
+@@ -2,7 +2,7 @@
+ LIB_DIR			=	@LIB_DIR@
+ CONF_DIR			=	@CONF_DIR@
+ MOD_CONF			=	@MOD_CONF@
+-CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0`
++CFLAGS			=	@CFLAGS@ `pkg-config gtk+-2.0 --cflags glib-2.0` -fPIC
+ INSTALL			=	@INSTALL@
+ INSTALL_DATA	=	@INSTALL_DATA@
+ #DESTDIR			=	@DESTDIR@
+--- XdeFactor-ng/configure.in.orig	2003-09-08 22:02:43.000000000 +0200
++++ XdeFactor-ng/configure.in	2004-04-11 00:32:33.843771538 +0200
+@@ -166,7 +166,9 @@
+ 
+ AC_OUTPUT(	Makefile 
+ 				src/Makefile 
++				src/crypto/Makefile
+ 				src/modules/Makefile
++				src/modules/common/rules.mak
+ 				src/modules/about/Makefile
+ 				src/modules/archive_invoices/Makefile
+ 				src/modules/clients/Makefile
