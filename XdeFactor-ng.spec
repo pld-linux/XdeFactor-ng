@@ -88,7 +88,7 @@ Definicja bazy dla XdeFactora.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/defactor-ng/x/modules,%{_bindir},%{_datadir}/%{name}/images,%{_libdir}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/defactor-ng/x/modules,%{_bindir},%{_datadir}/%{name}/images,%{_libdir},%{_mandir}/man1/}
 
 install src/xdefactor-ng $RPM_BUILD_ROOT%{_bindir}
 install conf/logo.jpg $RPM_BUILD_ROOT%{_datadir}/%{name}/images
@@ -129,6 +129,8 @@ for i in %{_modules}; do
 	cd ..
 done
 
+install doc/xdefactor-ng.1 %{_mandir}/man1/
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -137,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS README conf/modules.conf.example
+%doc AUTHORS README INSTALL TODO conf/modules.conf.example
 %attr(755,root,root) %{_bindir}/xdefactor-ng
 %attr(755,root,root) %{_libdir}/libxdef_*.so
 %dir %{_datadir}/%{name}
@@ -149,6 +151,7 @@ rm -rf $RPM_BUILD_ROOT
 #%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/host.name
 %dir %{_sysconfdir}/defactor-ng/x/modules
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/modules/*.conf
+%{_mandir}/man1/*
 
 %files database
 %defattr(644,root,root,755)
