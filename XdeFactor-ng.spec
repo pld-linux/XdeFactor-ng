@@ -1,7 +1,7 @@
 # TODO: march, files permissions - now passwords are stored 
 #	in worldreadable files.
 %define		_snap	20040308
-%define		_rel	0.1
+%define		_rel	0.2
 %define		_origname	XdeFactor-ng
 Summary:	XdeFactor-ng - New Generation of program to make invoices
 Summary(pl):	XdeFactor-ng - Nowa Generacja programu do fakturowania
@@ -20,6 +20,7 @@ Patch0:		%{_origname}-includes.patch
 Patch1:		%{_origname}-uid_gid_log.patch
 Patch2:		%{_origname}-pic.patch
 Patch3:		%{_origname}-ac_fix.patch
+Patch4:		%{_origname}-export-dynamic.patch
 URL:		http://defactor-ng.gnu.pl/
 BuildRequires:	autoconf >= 2.13
 BuildRequires:	automake
@@ -49,6 +50,7 @@ bibliotekê GTK+2.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__aclocal}
@@ -73,7 +75,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/*
-%{_libdir}/%{name}
+%dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/*
 %{_mandir}/man?/*
 %{_datadir}/%{name}
