@@ -1,0 +1,168 @@
+diff -Nura XdeFactor-ng.bef/src/Makefile XdeFactor-ng.new/src/Makefile
+--- XdeFactor-ng.bef/src/Makefile	2003-09-05 16:10:56.000000000 +0200
++++ XdeFactor-ng.new/src/Makefile	2005-07-03 01:55:10.797856112 +0200
+@@ -83,7 +83,7 @@
+ xdefactor_ng_SOURCES = main.c	callbacks.h config.h 	xdfConnSQL.c 	xdfDialogMsg.c		xdfLog.c 	search.c  xdfPQexec.c getopt.c
+ 
+ 
+-xdefactor_ng_LDFLAGS = -lpq -ldl -Wall `pkg-config gtk+-2.0 --libs glib-2.0`
++xdefactor_ng_LDFLAGS = -lpq -ldl -Wl,--export-dynamic -Wall `pkg-config gtk+-2.0 --libs glib-2.0`
+ 
+ AM_CPPFLAGS = `pkg-config gtk+-2.0 --cflags glib-2.0` -I/usr/include/gtk-2.0
+ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+diff -Nura XdeFactor-ng.bef/src/Makefile.am XdeFactor-ng.new/src/Makefile.am
+--- XdeFactor-ng.bef/src/Makefile.am	2003-09-08 22:02:44.000000000 +0200
++++ XdeFactor-ng.new/src/Makefile.am	2005-07-03 01:55:10.798855960 +0200
+@@ -7,7 +7,7 @@
+ 	xdfLog.c \
+ 	search.c  xdfPQexec.c getopt.c util.c
+ 
+-xdefactor_ng_LDFLAGS =  -lpq -ldl -Wall `pkg-config gtk+-2.0 --libs glib-2.0`
++xdefactor_ng_LDFLAGS =  -lpq -ldl -Wl,--export-dynamic -Wall `pkg-config gtk+-2.0 --libs glib-2.0`
+ 
+ 
+ AM_CPPFLAGS = `pkg-config gtk+-2.0 --cflags glib-2.0` -I/usr/include/gtk-2.0
+diff -Nura XdeFactor-ng.bef/src/Makefile.in XdeFactor-ng.new/src/Makefile.in
+--- XdeFactor-ng.bef/src/Makefile.in	2003-09-08 22:02:44.000000000 +0200
++++ XdeFactor-ng.new/src/Makefile.in	2005-07-03 01:55:10.802855352 +0200
+@@ -83,7 +83,7 @@
+ xdefactor_ng_SOURCES = main.c	callbacks.h config.h 	xdfConnSQL.c 	xdfDialogMsg.c		xdfLog.c 	search.c  xdfPQexec.c getopt.c util.c
+ 
+ 
+-xdefactor_ng_LDFLAGS = -lpq -ldl -Wall `pkg-config gtk+-2.0 --libs glib-2.0`
++xdefactor_ng_LDFLAGS = -lpq -ldl -Wl,--export-dynamic -Wall `pkg-config gtk+-2.0 --libs glib-2.0`
+ 
+ AM_CPPFLAGS = `pkg-config gtk+-2.0 --cflags glib-2.0` -I/usr/include/gtk-2.0
+ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+diff -Nura XdeFactor-ng.bef/src/modules/about/Makefile.in XdeFactor-ng.new/src/modules/about/Makefile.in
+--- XdeFactor-ng.bef/src/modules/about/Makefile.in	2005-07-03 01:50:32.836112000 +0200
++++ XdeFactor-ng.new/src/modules/about/Makefile.in	2005-07-03 01:55:10.803855200 +0200
+@@ -15,7 +15,7 @@
+ all: $(OBJECT)
+ 
+ $(OBJECT):
+-	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl
++	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl -Wl,--export-dynamic
+ 
+ clean:
+ 	rm -f *.so *.o
+diff -Nura XdeFactor-ng.bef/src/modules/archive_invoices/Makefile.in XdeFactor-ng.new/src/modules/archive_invoices/Makefile.in
+--- XdeFactor-ng.bef/src/modules/archive_invoices/Makefile.in	2005-07-03 01:50:32.837112000 +0200
++++ XdeFactor-ng.new/src/modules/archive_invoices/Makefile.in	2005-07-03 01:55:10.807854592 +0200
+@@ -16,7 +16,7 @@
+ all: $(OBJECT)
+ 
+ $(OBJECT):
+-	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl
++	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl -Wl,--export-dynamic
+ 
+ clean:
+ 	rm -f *.so *.o
+diff -Nura XdeFactor-ng.bef/src/modules/clients/Makefile.in XdeFactor-ng.new/src/modules/clients/Makefile.in
+--- XdeFactor-ng.bef/src/modules/clients/Makefile.in	2005-07-03 01:50:32.837112000 +0200
++++ XdeFactor-ng.new/src/modules/clients/Makefile.in	2005-07-03 01:55:10.808854440 +0200
+@@ -16,7 +16,7 @@
+ all: $(OBJECT)
+ 
+ $(OBJECT):
+-	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl
++	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl -Wl,--export-dynamic
+ 
+ clean:
+ 	rm -f *.so *.o
+diff -Nura XdeFactor-ng.bef/src/modules/goods/Makefile.in XdeFactor-ng.new/src/modules/goods/Makefile.in
+--- XdeFactor-ng.bef/src/modules/goods/Makefile.in	2005-07-03 01:50:32.839112000 +0200
++++ XdeFactor-ng.new/src/modules/goods/Makefile.in	2005-07-03 01:55:10.816853224 +0200
+@@ -16,7 +16,7 @@
+ all: $(OBJECT)
+ 
+ $(OBJECT):
+-	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl
++	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl -Wl,--export-dynamic
+ 
+ clean:
+ 	rm -f *.so *.o
+diff -Nura XdeFactor-ng.bef/src/modules/invoices/Makefile.in XdeFactor-ng.new/src/modules/invoices/Makefile.in
+--- XdeFactor-ng.bef/src/modules/invoices/Makefile.in	2005-07-03 01:50:32.840112000 +0200
++++ XdeFactor-ng.new/src/modules/invoices/Makefile.in	2005-07-03 01:55:10.816853224 +0200
+@@ -17,7 +17,7 @@
+ all: $(OBJECT)
+ 
+ $(OBJECT):
+-	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl
++	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl -Wl,--export-dynamic
+ 
+ clean:
+ 	rm -f *.so *.o
+diff -Nura XdeFactor-ng.bef/src/modules/login/Makefile.in XdeFactor-ng.new/src/modules/login/Makefile.in
+--- XdeFactor-ng.bef/src/modules/login/Makefile.in	2005-07-03 01:50:32.840112000 +0200
++++ XdeFactor-ng.new/src/modules/login/Makefile.in	2005-07-03 01:55:10.817853072 +0200
+@@ -16,7 +16,7 @@
+ all: $(OBJECT)
+ 
+ $(OBJECT):
+-	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl
++	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl -Wl,--export-dynamic
+ 
+ clean:
+ 	rm -f *.so *.o
+diff -Nura XdeFactor-ng.bef/src/modules/logout/Makefile.in XdeFactor-ng.new/src/modules/logout/Makefile.in
+--- XdeFactor-ng.bef/src/modules/logout/Makefile.in	2005-07-03 01:50:32.841111000 +0200
++++ XdeFactor-ng.new/src/modules/logout/Makefile.in	2005-07-03 01:55:10.818852920 +0200
+@@ -16,7 +16,7 @@
+ all: $(OBJECT)
+ 
+ $(OBJECT):
+-	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl
++	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl -Wl,--export-dynamic
+ 
+ clean:
+ 	rm -f *.so *.o
+diff -Nura XdeFactor-ng.bef/src/modules/means_of_transport/Makefile.in XdeFactor-ng.new/src/modules/means_of_transport/Makefile.in
+--- XdeFactor-ng.bef/src/modules/means_of_transport/Makefile.in	2005-07-03 01:50:32.842111000 +0200
++++ XdeFactor-ng.new/src/modules/means_of_transport/Makefile.in	2005-07-03 01:55:10.818852920 +0200
+@@ -16,7 +16,7 @@
+ all: $(OBJECT)
+ 
+ $(OBJECT):
+-	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl
++	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl -Wl,--export-dynamic
+ 
+ clean:
+ 	rm -f *.so *.o
+diff -Nura XdeFactor-ng.bef/src/modules/preferences/Makefile.in XdeFactor-ng.new/src/modules/preferences/Makefile.in
+--- XdeFactor-ng.bef/src/modules/preferences/Makefile.in	2003-08-24 12:03:00.000000000 +0200
++++ XdeFactor-ng.new/src/modules/preferences/Makefile.in	2005-07-03 01:55:10.819852768 +0200
+@@ -15,7 +15,7 @@
+ all: $(OBJECT)
+ 
+ $(OBJECT):
+-	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl
++	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl -Wl,--export-dynamic
+ 
+ clean:
+ 	rm -f *.so *.o
+diff -Nura XdeFactor-ng.bef/src/modules/stores/Makefile XdeFactor-ng.new/src/modules/stores/Makefile
+--- XdeFactor-ng.bef/src/modules/stores/Makefile	2005-07-03 01:50:32.873107000 +0200
++++ XdeFactor-ng.new/src/modules/stores/Makefile	2005-07-03 01:55:10.821852464 +0200
+@@ -17,7 +17,7 @@
+ all: $(OBJECT)
+ 
+ $(OBJECT):
+-	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl
++	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl -Wl,--export-dynamic
+ 
+ clean:
+ 	rm -f *.so *.o
+diff -Nura XdeFactor-ng.bef/src/modules/stores/Makefile.in XdeFactor-ng.new/src/modules/stores/Makefile.in
+--- XdeFactor-ng.bef/src/modules/stores/Makefile.in	2005-07-03 01:50:32.843111000 +0200
++++ XdeFactor-ng.new/src/modules/stores/Makefile.in	2005-07-03 01:55:10.821852464 +0200
+@@ -16,7 +16,7 @@
+ all: $(OBJECT)
+ 
+ $(OBJECT):
+-	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl
++	$(CC) $(CFLAGS) -shared -o $(OBJECT) $(OBJECT_SRC) -ldl -Wl,--export-dynamic
+ 
+ clean:
+ 	rm -f *.so *.o
