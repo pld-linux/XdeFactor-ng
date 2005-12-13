@@ -52,8 +52,8 @@ obs³ugi magazynów, zarz±dzania us³ugami/towarami, zarz±dzania ¶rodkami
 transportu, zarz±dzania fakturami archiwalnymi. Jest on oparty o
 bibliotekê GTK+2.
 
-Potrzebny jest dostêp do bazy danych PostgreSQL. Przyk³adowa
-struktura bazy znajduje siê w paczce %{name}-database.
+Potrzebny jest dostêp do bazy danych PostgreSQL. Przyk³adowa struktura
+bazy znajduje siê w paczce %{name}-database.
 
 %package database
 Summary:	Database specs for XdeFactor
@@ -114,7 +114,7 @@ for i in			\
 	README			\
 	Makefile;
 
-do 
+do
 	install deFactor-ng_sql/$i $RPM_BUILD_ROOT%{_datadir}/%{name}
 done
 
@@ -147,10 +147,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/images/logo.jpg
 %dir %{_sysconfdir}/defactor-ng
 %dir %{_sysconfdir}/defactor-ng/x
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/*.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/defactor-ng/x/*.conf
 #%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/host.name
 %dir %{_sysconfdir}/defactor-ng/x/modules
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/defactor-ng/x/modules/*.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/defactor-ng/x/modules/*.conf
 %{_mandir}/man1/*
 
 %files database
