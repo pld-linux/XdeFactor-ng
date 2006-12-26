@@ -12,7 +12,7 @@ Summary:	XdeFactor - New Generation of program to make invoices
 Summary(pl):	XdeFactor - nowa generacja programu do fakturowania
 Name:		XdeFactor-ng
 Version:	%{_snap}
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL
 Group:		Applications
@@ -129,7 +129,9 @@ for i in %{_modules}; do
 	cd ..
 done
 
-install doc/xdefactor-ng.1 %{_mandir}/man1/
+cd ../..
+
+install doc/xdefactor-ng.1 $RPM_BUILD_ROOT%{_mandir}/man1/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
