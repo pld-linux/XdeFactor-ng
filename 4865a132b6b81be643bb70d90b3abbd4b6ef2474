@@ -1,0 +1,2 @@
+- use more macros, missing dirs
+- %config(noreplace) for config files
