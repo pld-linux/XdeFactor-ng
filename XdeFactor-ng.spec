@@ -4,7 +4,7 @@
 %define		_rel	0.2
 %define		_origname	XdeFactor-ng
 Summary:	XdeFactor-ng - New Generation of program to make invoices
-Summary(pl):	XdeFactor-ng - Nowa Generacja programu do fakturowania
+Summary(pl.UTF-8):   XdeFactor-ng - Nowa Generacja programu do fakturowania
 Name:		xdefactor-ng
 Version:	%{_snap}
 Release:	%{_rel}
@@ -38,11 +38,11 @@ This is nice program to makeing invoices, service clients, service
 stores, service goods, service means of transport, service archive
 invoices. It's based on GTK+2 library.
 
-%description -l pl
-Ca³kiem przyjemny program do fakturowania, obs³ugi klientów, obs³ugi
-magazynów, zarz±dzania us³ugami/towarami, zarz±dzania ¶rodkami
-transportu, zarz±dzania fakturami archiwalnymi. Jest on oparty o
-bibliotekê GTK+2.
+%description -l pl.UTF-8
+CaÅ‚kiem przyjemny program do fakturowania, obsÅ‚ugi klientÃ³w, obsÅ‚ugi
+magazynÃ³w, zarzÄ…dzania usÅ‚ugami/towarami, zarzÄ…dzania Å›rodkami
+transportu, zarzÄ…dzania fakturami archiwalnymi. Jest on oparty o
+bibliotekÄ™ GTK+2.
 
 %prep
 %setup -q -n %{_origname} 
