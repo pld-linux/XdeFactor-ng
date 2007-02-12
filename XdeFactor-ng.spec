@@ -9,7 +9,7 @@
 %define		_dbsnap	2004_04_08
 %define		_modules login logout about clients goods invoices means_of_transport stores archive_invoices
 Summary:	XdeFactor - New Generation of program to make invoices
-Summary(pl.UTF-8):   XdeFactor - nowa generacja programu do fakturowania
+Summary(pl.UTF-8):	XdeFactor - nowa generacja programu do fakturowania
 Name:		XdeFactor-ng
 Version:	%{_snap}
 Release:	4
@@ -57,7 +57,7 @@ bazy znajduje się w paczce %{name}-database.
 
 %package database
 Summary:	Database specs for XdeFactor
-Summary(pl.UTF-8):   Definicja bazy dla XdeFactora
+Summary(pl.UTF-8):	Definicja bazy dla XdeFactora
 Group:		Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
